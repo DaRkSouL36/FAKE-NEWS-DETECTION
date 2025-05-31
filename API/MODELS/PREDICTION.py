@@ -1,0 +1,17 @@
+# FUNCTION TO PREDICT THE NEWS AS "REAL" OR "FAKE" BASED ON THE INPUT TEXT
+def predict_news(text, model, vectorizer):
+    
+    # TRANSFORMING THE INPUT TEXT USING THE VECTORIZER TO CONVERT IT INTO A FORMAT THAT CAN BE PASSED TO THE MODEL
+    transformed = vectorizer.transform([text])
+    
+    # MAKING PREDICTION USING THE MODEL AND GETTING THE CLASS LABEL (1 = REAL, 0 = FAKE)
+    prediction = model.predict(transformed)[0]  
+    
+    # GETTING THE PROBABILITY OF THE PREDICTION AND GETTING THE MAXIMUM PROBABILITY FOR THE PREDICTION
+    probability = model.predict_proba(transformed)[0].max()  
+    
+    # RETURNING THE PREDICTION AND CONFIDENCE LEVEL (ROUNDED TO 4 DECIMAL PLACES)
+    return {
+        "PREDICTION": "REAL" if prediction == 1 else "FAKE",   # RETURNING THE PREDICTION AS "REAL" OR "FAKE"
+        "CONFIDENCE": round(float(probability), 4)             # RETURNING THE MAXIMUM CONFIDENCE LEVEL WITH 4 DECIMAL PLACES
+    }

@@ -21,9 +21,9 @@ const navControls = document.getElementById("navControls"); // NAVIGATION CONTRO
 // DEFINES THE BASE URL FOR API REQUESTS (RELATIVE FOR DEPLOYMENT)
 const API_BASE = window.location.origin; // USES CURRENT SITE ORIGIN
 
-// FUNCTION TO CONSTRUCT THE API URL BASED ON SELECTED MODEL
-function getApiUrl(model) {
-  return `${API_BASE}/api/PREDICT?model=${encodeURIComponent(model)}`;
+// FUNCTION TO CONSTRUCT THE API URL (NO LONGER NEEDS MODEL AS QUERY PARAM)
+function getApiUrl() {
+  return `${API_BASE}/api/PREDICT`;
 }
 
 // =====================
@@ -48,11 +48,11 @@ analyzeBtn.addEventListener("click", async () => {
     showResult();
     analyzeBtn.disabled = true; // DISABLE BUTTON TO PREVENT MULTIPLE SUBMISSIONS
 
-    // SENDS POST REQUEST TO THE API WITH USER INPUT
-    const response = await fetch(getApiUrl(model), {
+    // SENDS POST REQUEST TO THE API WITH USER INPUT AND SELECTED MODEL
+    const response = await fetch(getApiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, model }), // SEND BOTH TEXT AND MODEL
     });
 
     // IF RESPONSE IS NOT OK, THROW ERROR

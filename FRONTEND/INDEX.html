@@ -1,51 +1,216 @@
 <!DOCTYPE html>
+<!-- DECLARES THE DOCUMENT TYPE AND HTML VERSION -->
+
 <html lang="en">
+  <!-- ROOT HTML ELEMENT, LANGUAGE SET TO ENGLISH -->
+
   <head>
+    <!-- HEAD SECTION: CONTAINS META INFORMATION, TITLE, AND LINKS TO RESOURCES -->
+
     <meta charset="UTF-8" />
+    <!-- DEFINES CHARACTER ENCODING AS UTF-8 FOR UNIVERSAL CHARACTER SUPPORT -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fake News Detector</title>
+    <!-- MAKES THE WEBSITE RESPONSIVE ON ALL DEVICES -->
 
-    <!-- LINK TO CUSTOM STYLESHEET -->
-    <link rel="stylesheet" href="STYLE.css" />
+    <title>FAKE NEWS DETECTOR</title>
+    <!-- TITLE OF THE WEBSITE SHOWN IN THE BROWSER TAB -->
 
-    <!-- GOOGLE FONT FOR TYPOGRAPHY -->
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- SETS THE WEBSITE'S ICON IN THE BROWSER TAB -->
+
+    <!-- GOOGLE FONTS & ICONS -->
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap"
       rel="stylesheet"
     />
+    <!-- IMPORTS THE 'ORBITRON' FONT FROM GOOGLE FONTS FOR STYLISH HEADINGS AND TEXT -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- IMPORTS FONT AWESOME ICONS FOR USE THROUGHOUT THE SITE -->
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="STYLE.css" />
+    <!-- LINKS THE EXTERNAL CSS FILE FOR ALL STYLES -->
   </head>
+
   <body>
+    <!-- BODY SECTION: CONTAINS ALL VISIBLE CONTENT AND STRUCTURE -->
+
     <!-- BACKGROUND VIDEO LAYER -->
     <video autoplay muted loop playsinline id="background-video">
-      <source
-        src="C:\FAKE NEWS DETECTION\FRONTEND\BACKGROUND\background.mp4"
-        type="video/mp4"
-      />
+      <!-- PLAYS A LOOPING, MUTED BACKGROUND VIDEO FOR A MODERN VISUAL EFFECT -->
+      <source src="BACKGROUND/background.mp4" type="video/mp4" />
+      <!-- PROVIDES THE VIDEO FILE (USE RELATIVE PATH FOR DEPLOYMENT) -->
+      YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.
+      <!-- FALLBACK TEXT IF VIDEO IS NOT SUPPORTED -->
     </video>
 
-    <!-- MAIN CONTAINER -->
+    <!-- MAIN CONTAINER OVERLAYING THE VIDEO -->
     <div class="overlay">
-      <nav class="navbar">
+      <!-- OVERLAY PROVIDES THE MAIN UI LAYER ABOVE THE VIDEO -->
+
+      <!-- NAVIGATION BAR -->
+      <nav class="navbar" aria-label="Main navigation">
+        <!-- FLEX NAVBAR FOR LOGO, MENU, AND CONTROLS -->
         <div class="logo">🕵️‍♂️ FAKE NEWS DETECTOR</div>
-        <div class="nav-toggle">&#9776;</div>
+        <!-- LOGO AND APP NAME -->
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Open navigation menu"
+          aria-controls="navControls"
+          aria-expanded="false"
+        >
+          &#9776;
+        </button>
+        <!-- HAMBURGER BUTTON FOR MOBILE NAVIGATION, ACCESSIBLE WITH ARIA ATTRIBUTES -->
+
+        <div class="nav-controls" id="navControls">
+          <!-- NAVIGATION CONTROLS: MODEL SELECTOR AND THEME TOGGLE -->
+          <button id="themeToggle" aria-label="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <!-- BUTTON TO TOGGLE BETWEEN DARK AND LIGHT THEMES -->
+        </div>
       </nav>
 
-      <!-- HEADER CONTENT -->
+      <!-- HEADER CONTENT SECTION -->
       <section class="hero">
+        <!-- HERO SECTION FOR MAIN CALL TO ACTION AND INPUT AREA -->
+
+        <div class="model-select-row">
+          <!-- MODEL SELECTION DROPDOWN ROW, PLACED ABOVE HEADLINE AND TEXTAREA -->
+          <label
+            for="modelSelect"
+            class="model-label"
+            style="font-weight: bold; letter-spacing: 1px"
+          >
+            MODEL
+          </label>
+          <!-- LABEL FOR MODEL DROPDOWN -->
+          <select id="modelSelect" title="Choose Model">
+            <!-- DROPDOWN TO SELECT ML MODEL -->
+            <option value="LOGISTIC">🤖 LOGISTIC</option>
+            <option value="LSTM">🧠 LSTM</option>
+          </select>
+        </div>
+        <!-- END MODEL SELECTION ROW -->
+
         <h1>DETECT FAKE NEWS<br /><span class="highlight">INSTANTLY</span></h1>
-        <textarea
-          placeholder="Paste your news article here..."
-          id="newsInput"
-        ></textarea>
-        <button id="analyzeBtn">ANALYZE</button>
-        <div id="resultContainer" class="hidden"></div>
+        <!-- MAIN TITLE WITH HIGHLIGHTED KEYWORD -->
+
+        <div class="textarea-container">
+          <!-- CONTAINER FOR TEXTAREA AND MICROPHONE BUTTON, POSITIONED RELATIVE FOR OVERLAP EFFECT -->
+          <div class="textarea-box">
+            <!-- BLACK ROUNDED BOX FOR TEXTAREA, ADDS GLOW AND BACKGROUND -->
+            <textarea
+              placeholder="PASTE YOUR NEWS ARTICLE HERE..."
+              id="newsInput"
+              aria-label="News article input"
+            ></textarea>
+            <!-- TEXTAREA FOR USER TO INPUT/PASTE NEWS ARTICLE -->
+            <button
+              id="micBtn"
+              class="button mic-button"
+              aria-label="Voice Input"
+              type="button"
+            >
+              <span class="mic-circle">
+                <i class="fas fa-microphone"></i>
+              </span>
+            </button>
+            <!-- BUTTON TO ENABLE VOICE INPUT USING MICROPHONE, GLOWING CIRCLE OVERLAPPING BOX -->
+          </div>
+        </div>
+        <!-- END TEXTAREA CONTAINER -->
+
+        <div class="action-buttons">
+          <button id="analyzeBtn" class="button">ANALYZE</button>
+        </div>
+        <!-- BUTTON TO SUBMIT THE NEWS ARTICLE FOR ANALYSIS -->
+
+        <div
+          id="resultContainer"
+          class="hidden"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+        <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
       </section>
 
       <!-- SCROLL HINT -->
-      <div class="scroll-indicator">▼</div>
+      <div class="scroll-indicator" aria-hidden="true">▼</div>
+      <!-- DECORATIVE SCROLL INDICATOR TO ENCOURAGE USERS TO SCROLL DOWN -->
+    </div>
+
+    <!-- FEEDBACK BUTTON FLOATING AT BOTTOM RIGHT -->
+    <button
+      id="feedbackToggle"
+      class="button feedback-button"
+      title="GIVE FEEDBACK"
+      aria-label="Open feedback form"
+    >
+      <i class="fas fa-comment-dots"></i>
+    </button>
+    <!-- BUTTON TO OPEN THE FEEDBACK MODAL -->
+
+    <!-- FEEDBACK MODAL DIALOG -->
+    <div
+      id="feedbackModal"
+      class="hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="feedbackModalTitle"
+      aria-describedby="feedbackModalDesc"
+      tabindex="-1"
+    >
+      <div class="modal-content">
+        <!-- MODAL CONTENT WRAPPER -->
+        <h2 id="feedbackModalTitle">SHARE YOUR FEEDBACK</h2>
+        <!-- MODAL TITLE -->
+
+        <div id="feedbackModalDesc" class="visually-hidden">
+          Please rate your satisfaction, tell us what you liked, and suggest
+          improvements.
+        </div>
+        <!-- HIDDEN DESCRIPTION FOR SCREEN READERS -->
+
+        <label for="rating"
+          >SATISFACTION (1–5):
+          <input type="range" min="1" max="5" id="rating" />
+        </label>
+        <!-- RANGE INPUT FOR SATISFACTION RATING -->
+
+        <textarea
+          placeholder="WHAT DID YOU LIKE?"
+          id="feedbackLike"
+          aria-label="What did you like?"
+        ></textarea>
+        <!-- TEXTAREA FOR POSITIVE FEEDBACK -->
+
+        <textarea
+          placeholder="WHAT CAN BE IMPROVED?"
+          id="feedbackImprove"
+          aria-label="What can be improved?"
+        ></textarea>
+        <!-- TEXTAREA FOR SUGGESTIONS/IMPROVEMENTS -->
+
+        <div class="modal-buttons">
+          <button id="submitFeedback" class="button modal-btn">SUBMIT</button>
+          <button id="closeModal" class="button modal-btn">CANCEL</button>
+        </div>
+        <!-- BUTTONS TO SUBMIT OR CANCEL FEEDBACK -->
+      </div>
     </div>
 
     <!-- SCRIPT -->
     <script src="SCRIPT.js"></script>
+    <!-- LINKS THE MAIN JAVASCRIPT FILE FOR ALL INTERACTIVITY -->
   </body>
 </html>

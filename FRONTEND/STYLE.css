@@ -546,54 +546,131 @@ body.light-mode .modal-content textarea {
   overflow: hidden;
 }
 
-/* LOADER/SPINNER FOR ANALYSIS STATE */
-.loader {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  border: 4px solid #0ff;
-  border-top: 4px solid #f0f;
+/* ========================= */
+/* NEW LAYOUT STYLES FOR MODEL SELECT, BLACK TEXTAREA BOX, MIC BUTTON */
+/* ========================= */
+
+/* MODEL SELECT ROW: FLEX CONTAINER FOR LABEL AND SELECT ABOVE TEXTAREA */
+.model-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* MODEL LABEL: BOLD AND LETTER SPACING */
+.model-label {
+  color: #0ff;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  font-size: 1rem;
+}
+
+/* TEXTAREA BOX: BLACK BACKGROUND, ROUNDED, GLOW, PADDING */
+.textarea-box {
+  position: relative;
+  background-color: #000;
+  border-radius: 15px;
+  padding: 20px 20px 20px 60px; /* LEFT PADDING FOR MIC BUTTON SPACE */
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* TEXTAREA INSIDE THE BOX: FULL WIDTH, WHITE TEXT, NO BORDER */
+.textarea-box textarea {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  border: none;
+  resize: vertical;
+  font-size: 1rem;
+  min-height: 150px;
+  outline: none;
+  font-family: "Orbitron", sans-serif;
+}
+
+.textarea-box textarea::placeholder {
+  color: #ccc;
+  text-transform: uppercase;
+}
+
+/* MIC BUTTON: CIRCULAR, GLOWING, POSITIONED OVERLAPPING LEFT SIDE OF TEXTAREA BOX */
+.mic-button {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  background: #000;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 12px auto;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  color: #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  z-index: 10;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+.mic-button:hover,
+.mic-button:focus {
+  background: #0ff;
+  color: #000;
+  outline: none;
+}
+
+/* MIC ICON INSIDE THE BUTTON */
+.mic-button i {
+  font-size: 1.2rem;
+}
+
+/* ACTION BUTTONS: CENTERED BELOW TEXTAREA */
+.action-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ADJUST TEXTAREA CONTAINER TO RELATIVE FOR POSITIONING MIC BUTTON */
+.textarea-container {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE ADJUSTMENTS FOR SMALL SCREENS */
+@media (max-width: 768px) {
+  .textarea-box {
+    padding: 15px 15px 15px 55px;
+  }
+  .mic-button {
+    width: 36px;
+    height: 36px;
+    left: 12px;
+  }
+  .mic-button i {
+    font-size: 1rem;
   }
 }
 
-/* RESULT PANEL ANIMATION */
-#resultContainer:not(.hidden) {
-  animation: slideIn 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
+@media (max-width: 480px) {
+  .textarea-box {
+    padding: 12px 12px 12px 50px;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+  .mic-button {
+    width: 32px;
+    height: 32px;
+    left: 10px;
   }
-}
-
-/* FEEDBACK MODAL ANIMATION */
-#feedbackModal:not(.hidden) .modal-content {
-  animation: modalAppear 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-@keyframes modalAppear {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
+  .mic-button i {
+    font-size: 0.9rem;
   }
-  to {
-    transform: scale(1);
-    opacity: 1;
+  textarea {
+    min-height: 120px;
   }
 }
-
-/* ...REST OF YOUR CSS REMAINS UNCHANGED... */

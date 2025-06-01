@@ -121,7 +121,7 @@ body.light-mode .scroll-indicator {
   outline-offset: 2px;
 }
 
-/* NAV CONTROLS: MODEL SELECT AND THEME TOGGLE */
+/* NAV CONTROLS: THEME TOGGLE */
 .nav-controls {
   display: flex;
   gap: 15px;
@@ -155,19 +155,7 @@ body.light-mode .scroll-indicator {
   }
 }
 
-/* MODEL SELECT DROPDOWN AND THEME TOGGLE BUTTON */
-#modelSelect {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: 1px solid #fff;
-  outline: none;
-  backdrop-filter: blur(4px);
-  transition: background 0.4s, color 0.4s;
-}
-
+/* THEME TOGGLE BUTTON */
 #themeToggle {
   background: none;
   border: none;
@@ -202,61 +190,113 @@ body.light-mode .scroll-indicator {
   filter: brightness(1.2) contrast(1.3);
 }
 
-/* INPUT BOX */
-/* RELATIVE CONTAINER FOR TEXTAREA AND MIC BUTTON */
-.textarea-container {
-  position: relative;
-}
-
-/* MAIN TEXTAREA FOR NEWS INPUT */
-textarea {
+/* MODEL SELECT ROW: LEFT-ALIGNED, ABOVE TEXTAREA */
+.model-select-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 auto 18px auto;
+  max-width: 700px;
   width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* MODEL SELECT DROPDOWN */
+#modelSelect {
+  background: #111;
   color: #fff;
-  backdrop-filter: blur(5px);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px #0ff;
   outline: none;
+  margin-left: 0;
+  margin-right: auto;
+  transition: box-shadow 0.2s, background 0.4s, color 0.4s;
+}
+
+#modelSelect:focus {
+  box-shadow: 0 0 16px #0ff;
+}
+
+/* TEXTAREA BOX: BLACK BACKGROUND, ROUNDED, GLOW, PADDING */
+.textarea-box {
+  position: relative;
+  background: #111;
+  border-radius: 18px;
+  padding: 30px 24px 30px 24px;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #0ff2;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* TEXTAREA INSIDE THE BOX: FULL WIDTH, WHITE TEXT, NO BORDER */
+.textarea-box textarea {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  border: none;
   resize: vertical;
-  box-shadow: 0 2px 16px #0ff2;
-  transition: background 0.4s, color 0.4s;
+  font-size: 1.1rem;
+  min-height: 120px;
+  outline: none;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  padding: 0;
 }
 
-textarea:focus {
-  outline: 2px solid #0ff;
-  outline-offset: 2px;
-  background: rgba(0, 255, 255, 0.08);
+.textarea-box textarea::placeholder {
+  color: #aaa;
+  text-transform: none;
+  font-size: 1.05rem;
 }
 
-/* RESPONSIVE TEXTAREA FOR SMALL SCREENS */
-@media (max-width: 480px) {
-  textarea {
-    font-size: 0.95rem;
-    padding: 10px;
-    min-height: 90px;
-  }
-}
-
-/* MICROPHONE BUTTON FOR VOICE INPUT */
+/* MIC BUTTON: CIRCULAR, GLOWING, OVERLAPS LOWER LEFT CORNER OF TEXTAREA BOX */
 .mic-button {
   position: absolute;
-  top: 25px;
-  right: 15px;
-  background: transparent;
-  border: none;
+  left: -32px;
+  bottom: -32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #0ff;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #f0f;
   color: #0ff;
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  z-index: 10;
 }
 
+.mic-button:hover,
 .mic-button:focus {
-  outline: 2px solid #0ff;
-  outline-offset: 2px;
-  color: #f0f;
+  background: #0ff;
+  color: #111;
+  box-shadow: 0 0 24px #0ff, 0 0 36px #f0f;
+  outline: none;
+}
+
+.mic-button i {
+  font-size: 1.5rem;
+}
+
+/* ACTION BUTTONS: CENTERED BELOW TEXTAREA */
+.action-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ADJUST TEXTAREA CONTAINER TO RELATIVE FOR POSITIONING MIC BUTTON */
+.textarea-container {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /* BUTTON STYLES: CONSISTENT ACROSS ALL BUTTONS */
@@ -519,6 +559,20 @@ body.light-mode .modal-content textarea {
   .modal-content {
     padding: 18px;
   }
+  .textarea-box {
+    padding: 20px 10px 20px 10px;
+    max-width: 98vw;
+  }
+  .model-select-row {
+    max-width: 98vw;
+  }
+  .mic-button {
+    width: 52px;
+    height: 52px;
+    left: -26px;
+    bottom: -26px;
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -535,6 +589,20 @@ body.light-mode .modal-content textarea {
   .hero {
     margin: 60px auto;
   }
+  .textarea-box {
+    padding: 10px 3px 10px 3px;
+  }
+  .mic-button {
+    width: 38px;
+    height: 38px;
+    left: -17px;
+    bottom: -17px;
+    font-size: 1.1rem;
+  }
+  #modelSelect {
+    font-size: 0.98rem;
+    padding: 7px 10px;
+  }
 }
 
 /* VISUALLY HIDDEN: FOR ACCESSIBILITY DESCRIPTIONS */
@@ -544,133 +612,4 @@ body.light-mode .modal-content textarea {
   width: 1px;
   height: 1px;
   overflow: hidden;
-}
-
-/* ========================= */
-/* NEW LAYOUT STYLES FOR MODEL SELECT, BLACK TEXTAREA BOX, MIC BUTTON */
-/* ========================= */
-
-/* MODEL SELECT ROW: FLEX CONTAINER FOR LABEL AND SELECT ABOVE TEXTAREA */
-.model-select-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-/* MODEL LABEL: BOLD AND LETTER SPACING */
-.model-label {
-  color: #0ff;
-  font-weight: bold;
-  letter-spacing: 1.2px;
-  font-size: 1rem;
-}
-
-/* TEXTAREA BOX: BLACK BACKGROUND, ROUNDED, GLOW, PADDING */
-.textarea-box {
-  position: relative;
-  background-color: #000;
-  border-radius: 15px;
-  padding: 20px 20px 20px 60px; /* LEFT PADDING FOR MIC BUTTON SPACE */
-  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* TEXTAREA INSIDE THE BOX: FULL WIDTH, WHITE TEXT, NO BORDER */
-.textarea-box textarea {
-  width: 100%;
-  background: transparent;
-  color: #fff;
-  border: none;
-  resize: vertical;
-  font-size: 1rem;
-  min-height: 150px;
-  outline: none;
-  font-family: "Orbitron", sans-serif;
-}
-
-.textarea-box textarea::placeholder {
-  color: #ccc;
-  text-transform: uppercase;
-}
-
-/* MIC BUTTON: CIRCULAR, GLOWING, POSITIONED OVERLAPPING LEFT SIDE OF TEXTAREA BOX */
-.mic-button {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  background: #000;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #0ff;
-  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-  color: #0ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-  z-index: 10;
-}
-
-.mic-button:hover,
-.mic-button:focus {
-  background: #0ff;
-  color: #000;
-  outline: none;
-}
-
-/* MIC ICON INSIDE THE BUTTON */
-.mic-button i {
-  font-size: 1.2rem;
-}
-
-/* ACTION BUTTONS: CENTERED BELOW TEXTAREA */
-.action-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-/* ADJUST TEXTAREA CONTAINER TO RELATIVE FOR POSITIONING MIC BUTTON */
-.textarea-container {
-  position: relative;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* RESPONSIVE ADJUSTMENTS FOR SMALL SCREENS */
-@media (max-width: 768px) {
-  .textarea-box {
-    padding: 15px 15px 15px 55px;
-  }
-  .mic-button {
-    width: 36px;
-    height: 36px;
-    left: 12px;
-  }
-  .mic-button i {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .textarea-box {
-    padding: 12px 12px 12px 50px;
-  }
-  .mic-button {
-    width: 32px;
-    height: 32px;
-    left: 10px;
-  }
-  .mic-button i {
-    font-size: 0.9rem;
-  }
-  textarea {
-    min-height: 120px;
-  }
 }

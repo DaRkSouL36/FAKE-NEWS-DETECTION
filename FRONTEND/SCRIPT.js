@@ -19,7 +19,10 @@ const navControls = document.getElementById("navControls"); // NAVIGATION CONTRO
 // CONFIGURABLE API ENDPOINT
 // =====================
 // DEFINES THE BASE URL FOR API REQUESTS (RELATIVE FOR DEPLOYMENT)
-const API_BASE = window.location.origin; // USES CURRENT SITE ORIGIN
+const API_BASE = "http://127.0.0.1:8000";
+function getApiUrl() {
+  return `${API_BASE}/api/PREDICT`;
+}
 
 // FUNCTION TO CONSTRUCT THE API URL (NO LONGER NEEDS MODEL AS QUERY PARAM)
 function getApiUrl() {

@@ -318,3 +318,71 @@ body.light-mode .modal-content textarea {
   height: 1px;
   overflow: hidden;
 }
+
+/* ===========================
+   EXPLANATION BOX & COPY BUTTON
+   =========================== */
+
+/* CONTAINER FOR EXPLANATION AREA */
+.explanation-container {
+  margin-top: 18px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* READONLY TEXTAREA FOR EXPLANATION */
+.explanation-box {
+  width: 100%;
+  background: #111;
+  color: #0ff;
+  border: 2px solid #0ff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  margin-top: 4px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  min-height: 72px;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+/* LIGHT THEME OVERRIDE */
+body.light-mode .explanation-box {
+  background: #f8fafd;
+  color: #007b8a;
+  border-color: #0cf;
+}
+
+/* COPY BUTTON FOR EXPLANATION */
+.copy-btn {
+  align-self: flex-end;
+  margin-top: 4px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  border-radius: 18px;
+  background: linear-gradient(45deg, #0ff, #0cf);
+  color: #191919;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 10px #0ff4;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-btn:hover,
+.copy-btn:focus {
+  background: linear-gradient(45deg, #0cf, #0ff);
+  color: #fff;
+  box-shadow: 0 0 18px #0ff8;
+  outline: none;
+}

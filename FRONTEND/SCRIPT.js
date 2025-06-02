@@ -15,6 +15,10 @@ const submitFeedback = document.getElementById("submitFeedback"); // BUTTON TO S
 const navToggle = document.getElementById("navToggle"); // HAMBURGER MENU BUTTON FOR MOBILE NAV
 const navControls = document.getElementById("navControls"); // NAVIGATION CONTROLS CONTAINER
 
+// HOOKS FOR EXPLANATION TEXTAREA AND COPY BUTTON
+const explanationBox = document.getElementById("explanationBox"); // TEXTAREA TO DISPLAY LLM EXPLANATION
+const copyExplanationBtn = document.getElementById("copyExplanationBtn"); // BUTTON TO COPY EXPLANATION
+
 // =====================
 // CONFIGURABLE API ENDPOINT
 // =====================
@@ -39,6 +43,8 @@ analyzeBtn.addEventListener("click", async () => {
     resultEl.innerHTML =
       '<span class="warning-text">⚠️ PLEASE ENTER SOME TEXT TO ANALYZE.</span>';
     showResult();
+    // CLEAR EXPLANATION FIELD IF PRESENT
+    if (explanationBox) explanationBox.value = "";
     return;
   }
 
@@ -47,6 +53,9 @@ analyzeBtn.addEventListener("click", async () => {
     resultEl.innerHTML = `<div class="loader" aria-label="ANALYZING"></div><div style="margin-top:10px;letter-spacing:1px;">🔍 ANALYZING...</div>`;
     showResult();
     analyzeBtn.disabled = true; // DISABLE BUTTON TO PREVENT MULTIPLE SUBMISSIONS
+
+    // CLEAR EXPLANATION FIELD WHILE ANALYZING
+    if (explanationBox) explanationBox.value = "";
 
     // SENDS POST REQUEST TO THE API WITH USER INPUT AND SELECTED MODEL
     const response = await fetch(getApiUrl(), {
@@ -74,22 +83,60 @@ analyzeBtn.addEventListener("click", async () => {
         };font-weight:bold;">${result.PREDICTION.toUpperCase()}</span><br>
         <strong>CONFIDENCE:</strong> ${(result.CONFIDENCE * 100).toFixed(2)}%
       `;
+
+      // SET THE EXPLANATION IN THE TEXTAREA IF AVAILABLE
+      if (explanationBox && typeof result.EXPLANATION === "string") {
+        explanationBox.value = result.EXPLANATION;
+      } else if (explanationBox) {
+        explanationBox.value = "NO EXPLANATION AVAILABLE.";
+      }
     } else {
       // IF RESULT IS INVALID, SHOW ERROR
       resultEl.innerHTML =
         '<span class="error-text">⚠️ INVALID DATA RECEIVED FROM API.</span>';
+      if (explanationBox) explanationBox.value = "";
     }
   } catch (err) {
     // ON ERROR, SHOW ERROR MESSAGE
     console.error("API ERROR:", err);
     resultEl.innerHTML =
       '<span class="error-text">❌ ERROR CONTACTING THE API. PLEASE TRY AGAIN LATER.</span>';
+    if (explanationBox) explanationBox.value = "";
   } finally {
     newsInput.focus(); // RETURN FOCUS TO INPUT
     analyzeBtn.disabled = false; // RE-ENABLE ANALYZE BUTTON
     animateResult(); // ANIMATE RESULT CONTAINER
   }
 });
+
+// =====================
+// 1B. COPY EXPLANATION BUTTON LOGIC
+// =====================
+// HANDLES CLICK EVENT FOR COPY BUTTON TO COPY EXPLANATION TO CLIPBOARD
+if (copyExplanationBtn && explanationBox) {
+  copyExplanationBtn.addEventListener("click", async () => {
+    // SELECT THE TEXT IN THE TEXTAREA
+    explanationBox.select();
+    explanationBox.setSelectionRange(0, 99999); // FOR MOBILE DEVICES
+
+    // TRY TO USE THE MODERN CLIPBOARD API
+    try {
+      await navigator.clipboard.writeText(explanationBox.value);
+      showToast("EXPLANATION COPIED!", "success");
+    } catch (err) {
+      // FALLBACK TO execCommand IF CLIPBOARD API FAILS
+      try {
+        document.execCommand("copy");
+        showToast("EXPLANATION COPIED!", "success");
+      } catch (err2) {
+        showToast("FAILED TO COPY EXPLANATION.", "error");
+      }
+    }
+    // REMOVE SELECTION AFTER COPYING
+    explanationBox.setSelectionRange(0, 0);
+    explanationBox.blur();
+  });
+}
 
 // =====================
 // 2. VOICE INPUT (SPEECH-TO-TEXT)

@@ -1,0 +1,174 @@
+/* NAVBAR */
+/* FLEX CONTAINER FOR LOGO, NAV TOGGLE, AND CONTROLS */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4); /* SEMI-TRANSPARENT FOR OVERLAY */
+  z-index: 10;
+  transition: background 0.4s, color 0.4s;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* NAV TOGGLE BUTTON FOR MOBILE MENU */
+.nav-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none; /* HIDDEN ON DESKTOP */
+  background: none;
+  border: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.nav-toggle:focus {
+  outline: 2px solid #0ff;
+  outline-offset: 2px;
+}
+
+/* NAV CONTROLS: THEME TOGGLE */
+.nav-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+/* MOBILE NAV TOGGLE */
+/* SHOWS NAV TOGGLE AND DROPDOWN MENU ON SMALL SCREENS */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-controls {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    padding: 15px 20px;
+    border-radius: 0 0 12px 12px;
+    z-index: 15;
+    box-shadow: 0 4px 12px #0008;
+  }
+  .navbar.open .nav-controls {
+    display: flex;
+    animation: fadeInDown 0.3s;
+  }
+}
+
+/* THEME TOGGLE BUTTON */
+#themeToggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+/* ACTION BUTTONS: CENTERED BELOW TEXTAREA */
+.action-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ADJUST TEXTAREA CONTAINER TO RELATIVE FOR POSITIONING MIC BUTTON */
+.textarea-container {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* SCROLL INDICATOR: BOUNCING ARROW FOR USER HINT */
+.scroll-indicator {
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+  margin-top: 50px;
+  color: #0ff;
+}
+
+/* HIDDEN CLASS: UTILITY TO HIDE ELEMENTS */
+.hidden {
+  display: none !important;
+}
+
+/* RESPONSIVE: MODAL & TEXTAREA FOR SMALL SCREENS */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .modal-content {
+    padding: 18px;
+  }
+  .textarea-box {
+    padding: 20px 10px 20px 10px;
+    max-width: 98vw;
+  }
+  .model-select-row {
+    max-width: 98vw;
+  }
+  .mic-button {
+    width: 52px;
+    height: 52px;
+    left: -26px;
+    bottom: -26px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+  .feedback-button {
+    right: 10px;
+    bottom: 10px;
+    padding: 10px 16px;
+    font-size: 1.1rem;
+  }
+  .hero {
+    margin: 60px auto;
+  }
+  .textarea-box {
+    padding: 10px 3px 10px 3px;
+  }
+  .mic-button {
+    width: 38px;
+    height: 38px;
+    left: -17px;
+    bottom: -17px;
+    font-size: 1.1rem;
+  }
+  #modelSelect {
+    font-size: 0.98rem;
+    padding: 7px 10px;
+  }
+}
+
+/* CUSTOM SCROLLBAR FOR MODERN LOOK */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #191919;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #0ff, #f0f 70%);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #0cf, #0ff 70%);
+}

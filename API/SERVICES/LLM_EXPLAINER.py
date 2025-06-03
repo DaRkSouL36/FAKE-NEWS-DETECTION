@@ -5,7 +5,7 @@ class LLMExplainer:
         # INITIALIZES THE TEXT-GENERATION PIPELINE WITH THE LLAMA-3 8B MODEL
         self.generator = pipeline(
             "text-generation",
-            model="meta-llama/Llama-3-8b"
+            model="meta-llama/Meta-Llama-3-8B"
         )
 
     def explain(self, article_text, prediction):
@@ -38,16 +38,16 @@ class LLMExplainer:
         # CALLS THE LLAMA MODEL TO GENERATE THE EXPLANATION BASED ON THE PROMPT
         result = self.generator(
             prompt,
-            max_length=max_tokens,
-            do_sample=False,       # DISABLES SAMPLING FOR MORE CONSISTENT OUTPUT
-            temperature=0.7,       # SETS TEMPERATURE TO BALANCE CREATIVITY AND RELIABILITY
-            top_p=0.9,             # NUCLEUS SAMPLING TO CONTROL OUTPUT DIVERSITY
-            top_k=50               # LIMITS TO TOP 50 CANDIDATE TOKENS
+            max_new_tokens=max_tokens,   # USE max_new_tokens INSTEAD OF max_length
+            do_sample=False,             # DETERMINISTIC OUTPUT, DISABLES SAMPLING FOR MORE CONSISTENT OUTPUT
+            truncation=True,             # ENSURE PROMPT IS TRUNCATED IF TOO LONG
+            pad_token_id=self.generator.tokenizer.eos_token_id  # AVOID PAD WARNINGS
         )
+
 
         # EXTRACTS ONLY THE GENERATED EXPLANATION TEXT AFTER THE "EXPLANATION:" KEYWORD
         # CONVERTS THE OUTPUT TO UPPERCASE FOR CONSISTENCY
         explanation = result[0]["generated_text"].split("EXPLANATION:")[-1].strip().upper()
 
         # RETURNS THE FINAL EXPLANATION WITH A DISCLAIMER
-        return explanation + " (THIS IS AN AI-GENERATED EXPLANATION.)"
+        return explanation + " (THIS IS AN AI-GENERATED EXPLANATION!)"

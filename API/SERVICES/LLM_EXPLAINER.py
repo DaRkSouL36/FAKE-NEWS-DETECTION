@@ -41,15 +41,15 @@ class LLMExplainer:
 
             # BUILDS A NATURAL-LANGUAGE PROMPT TO INSTRUCT THE LLM TO EXPLAIN ITS CLASSIFICATION.
             prompt_template = (
-                f"ANALYZE THIS NEWS ARTICLE AND EXPLAIN IN 2-4 SENTENCES WHY IT IS CLASSIFIED AS {prediction}."
-                f" FOCUS ON:\n"
+                f"ANALYZE THE FOLLOWING NEWS ARTICLE AND EXPLAIN IN EXACTLY 2 TO 4 SENTENCES WHY IT IS CLASSIFIED AS {prediction.upper()}."
+                f" YOUR EXPLANATION MUST BE CLEAR, CONCISE, AND GROUNDED IN THE CONTENT OF THE ARTICLE. FOCUS SPECIFICALLY ON:\n"
                 f"- SOURCE CREDIBILITY\n"
                 f"- EVIDENCE QUALITY\n"
-                f"- LOGICAL CONSISTENCY\n\n"
+                f"- LOGICAL CONSISTENCY\n"
+                f"DO NOT EXCEED 4 SENTENCES.\n\n"
                 f"ARTICLE:\n{truncated_text}\n\n"
                 f"EXPLANATION:\n"
             )
-
 
             # GENERATES THE EXPLANATION USING THE LLM WITH STRICT OUTPUT LIMITS AND RELIABLE TERMINATION.
             generation_result = self.generator(
@@ -81,10 +81,10 @@ class LLMExplainer:
                 clean_explanation = "EXPLANATION UNAVAILABLE OR TOO SHORT."
 
             # RETURNS THE FINAL EXPLANATION WITH A SOURCE DISCLAIMER.
-            return f"{clean_explanation} (SOURCE: AI FACT-CHECKING SYSTEM)"
+            return f"{clean_explanation} \n(SOURCE: AI FACT-CHECKING SYSTEM)"
 
         except Exception as gen_error:
             # LOGS ANY ERRORS THAT OCCUR DURING THE EXPLANATION GENERATION PROCESS.
             logging.error(f"EXPLANATION FAILED: {str(gen_error)}\nRAW OUTPUT: {raw_output}\nPROMPT: {prompt_template}")
             # RETURNS A USER-FRIENDLY MESSAGE IF AN ERROR OCCURS.
-            return "EXPLANATION TEMPORARILY UNAVAILABLE DUE TO TECHNICAL DIFFICULTIES. (SOURCE: AI FACT-CHECKING SYSTEM)"
+            return "EXPLANATION TEMPORARILY UNAVAILABLE DUE TO TECHNICAL DIFFICULTIES. \n(SOURCE: AI FACT-CHECKING SYSTEM)"

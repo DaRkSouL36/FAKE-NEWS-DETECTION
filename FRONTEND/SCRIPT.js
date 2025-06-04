@@ -43,7 +43,6 @@ analyzeBtn.addEventListener("click", async () => {
     resultEl.innerHTML =
       '<span class="warning-text">⚠️ PLEASE ENTER SOME TEXT TO ANALYZE.</span>';
     showResult();
-    // CLEAR EXPLANATION FIELD IF PRESENT
     if (explanationBox) explanationBox.value = "";
     return;
   }
@@ -52,16 +51,14 @@ analyzeBtn.addEventListener("click", async () => {
     // SHOW LOADER SPINNER AND "ANALYZING..." MESSAGE
     resultEl.innerHTML = `<div class="loader" aria-label="ANALYZING"></div><div style="margin-top:10px;letter-spacing:1px;">🔍 ANALYZING...</div>`;
     showResult();
-    analyzeBtn.disabled = true; // DISABLE BUTTON TO PREVENT MULTIPLE SUBMISSIONS
-
-    // CLEAR EXPLANATION FIELD WHILE ANALYZING
+    analyzeBtn.disabled = true;
     if (explanationBox) explanationBox.value = "";
 
     // SENDS POST REQUEST TO THE API WITH USER INPUT AND SELECTED MODEL
     const response = await fetch(getApiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, model }), // SEND BOTH TEXT AND MODEL
+      body: JSON.stringify({ text, model }),
     });
 
     // IF RESPONSE IS NOT OK, THROW ERROR
@@ -70,6 +67,9 @@ analyzeBtn.addEventListener("click", async () => {
     }
 
     const result = await response.json(); // PARSE API RESPONSE
+
+    // LOGS THE RAW API RESPONSE FOR DEBUGGING
+    console.log("API RESPONSE:", result);
 
     // IF RESULT IS VALID, DISPLAY PREDICTION AND CONFIDENCE
     if (
@@ -84,11 +84,16 @@ analyzeBtn.addEventListener("click", async () => {
         <strong>CONFIDENCE:</strong> ${(result.CONFIDENCE * 100).toFixed(2)}%
       `;
 
-      // SET THE EXPLANATION IN THE TEXTAREA IF AVAILABLE
-      if (explanationBox && typeof result.EXPLANATION === "string") {
-        explanationBox.value = result.EXPLANATION;
-      } else if (explanationBox) {
-        explanationBox.value = "NO EXPLANATION AVAILABLE.";
+      // FIELD NAME SAFETY: ACCEPTS BOTH UPPERCASE AND LOWERCASE KEYS
+      let explanation = result.EXPLANATION || result.explanation || "";
+
+      // FALLBACK IF EXPLANATION IS EMPTY OR TOO SHORT
+      if (explanationBox) {
+        if (typeof explanation === "string" && explanation.trim().length > 0) {
+          explanationBox.value = explanation.trim();
+        } else {
+          explanationBox.value = "NO EXPLANATION AVAILABLE.";
+        }
       }
     } else {
       // IF RESULT IS INVALID, SHOW ERROR
@@ -103,9 +108,9 @@ analyzeBtn.addEventListener("click", async () => {
       '<span class="error-text">❌ ERROR CONTACTING THE API. PLEASE TRY AGAIN LATER.</span>';
     if (explanationBox) explanationBox.value = "";
   } finally {
-    newsInput.focus(); // RETURN FOCUS TO INPUT
-    analyzeBtn.disabled = false; // RE-ENABLE ANALYZE BUTTON
-    animateResult(); // ANIMATE RESULT CONTAINER
+    newsInput.focus();
+    analyzeBtn.disabled = false;
+    animateResult();
   }
 });
 
@@ -115,16 +120,13 @@ analyzeBtn.addEventListener("click", async () => {
 // HANDLES CLICK EVENT FOR COPY BUTTON TO COPY EXPLANATION TO CLIPBOARD
 if (copyExplanationBtn && explanationBox) {
   copyExplanationBtn.addEventListener("click", async () => {
-    // SELECT THE TEXT IN THE TEXTAREA
     explanationBox.select();
     explanationBox.setSelectionRange(0, 99999); // FOR MOBILE DEVICES
 
-    // TRY TO USE THE MODERN CLIPBOARD API
     try {
       await navigator.clipboard.writeText(explanationBox.value);
       showToast("EXPLANATION COPIED!", "success");
     } catch (err) {
-      // FALLBACK TO execCommand IF CLIPBOARD API FAILS
       try {
         document.execCommand("copy");
         showToast("EXPLANATION COPIED!", "success");
@@ -132,11 +134,12 @@ if (copyExplanationBtn && explanationBox) {
         showToast("FAILED TO COPY EXPLANATION.", "error");
       }
     }
-    // REMOVE SELECTION AFTER COPYING
     explanationBox.setSelectionRange(0, 0);
     explanationBox.blur();
   });
 }
+
+// ... (rest of your code unchanged)
 
 // =====================
 // 2. VOICE INPUT (SPEECH-TO-TEXT)

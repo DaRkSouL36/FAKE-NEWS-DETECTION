@@ -1,48 +1,77 @@
-from fastapi import APIRouter, HTTPException               # IMPORTS APIRouter FOR ROUTE HANDLING AND HTTPException FOR ERROR RESPONSES
-from pydantic import BaseModel                             # IMPORTS BaseModel TO DEFINE REQUEST SCHEMA FOR INPUT VALIDATION
-from MODELS.MODEL_LOADER import load_models_and_vectorizer # IMPORTS FUNCTION TO LOAD ALL TRAINED MODELS AND A SHARED TF-IDF VECTORIZER
-from MODELS.PREDICTION import predict_news                 # IMPORTS THE FUNCTION THAT HANDLES TEXT CLASSIFICATION
-from UTILS.LOGGER import logger                            # IMPORTS A CUSTOM LOGGER FOR TRACKING EVENTS AND ERRORS
-from SERVICES.LLM_EXPLAINER import LLMExplainer            # IMPORTS THE LLM-BASED EXPLANATION GENERATOR CLASS
+from fastapi import APIRouter, HTTPException               # IMPORTS APIRouter AND HTTPException FOR ROUTE HANDLING AND ERROR RESPONSES
+from pydantic import BaseModel                             # IMPORTS BaseModel FOR REQUEST INPUT VALIDATION
+from MODELS.MODEL_LOADER import load_models_and_vectorizer # IMPORTS FUNCTION TO LOAD ML MODELS AND VECTORIZER
+from MODELS.PREDICTION import predict_news                 # IMPORTS NEWS CLASSIFICATION FUNCTION
+from UTILS.LOGGER import logger                            # IMPORTS CUSTOM LOGGER FOR EVENT TRACKING
+from SERVICES.LLM_EXPLAINER import LLMExplainer            # IMPORTS LLM-BASED EXPLANATION GENERATOR
 
-# DEFINES THE EXPECTED REQUEST BODY SCHEMA FOR THE /PREDICT ENDPOINT
+# DEFINES THE REQUEST BODY STRUCTURE FOR THE /PREDICT ENDPOINT
 class NewsInput(BaseModel):
-    text: str                                               # FIELD TO RECEIVE THE NEWS ARTICLE TEXT
-    model: str                                              # FIELD TO SPECIFY WHICH MODEL TO USE FOR PREDICTION
+    text: str                                               # FIELD FOR NEWS ARTICLE TEXT INPUT
+    model: str                                              # FIELD TO SPECIFY ML MODEL SELECTION
 
-# LOADS ALL AVAILABLE MODELS AND A SHARED TF-IDF VECTORIZER AT APPLICATION STARTUP
-models, vectorizer = load_models_and_vectorizer()           # RETURNS A DICTIONARY OF MODELS AND ONE SHARED VECTORIZER
-llm_explainer = LLMExplainer()                              # INITIALIZES THE LLM EXPLAINER ONCE TO AVOID REPEATED LOADING
+# LOADS ALL TRAINED MODELS AND SHARED VECTORIZER DURING APPLICATION STARTUP
+models, vectorizer = load_models_and_vectorizer()           # RETURNS DICTIONARY OF MODELS AND TF-IDF VECTORIZER
+llm_explainer = LLMExplainer()                              # INITIALIZES LLM EXPLAINER SINGLETON
 
-# CREATES A FASTAPI ROUTER INSTANCE UNDER THE TAG "PREDICTION"
-router = APIRouter(tags=["PREDICTION"])
+# CREATES FASTAPI ROUTER INSTANCE FOR PREDICTION-RELATED ENDPOINTS
+router = APIRouter(tags=["PREDICTION"])                     # GROUPS ROUTES UNDER "PREDICTION" TAG IN SWAGGER UI
 
-# DEFINES THE /PREDICT ENDPOINT THAT HANDLES TEXT CLASSIFICATION REQUESTS
+# DEFINES THE /PREDICT ENDPOINT FOR NEWS VERACITY ANALYSIS
 @router.post("/PREDICT")
-def get_prediction(data: NewsInput):
+def analyze_news(data: NewsInput):
+    """
+    HANDLES NEWS ARTICLE CLASSIFICATION AND EXPLANATION GENERATION.
+    
+    PROCESS FLOW:
+    1. VALIDATE MODEL SELECTION
+    2. CLASSIFY ARTICLE USING SELECTED MODEL
+    3. GENERATE AI EXPLANATION
+    4. RETURN STRUCTURED RESPONSE
+    """
     try:
-        # LOGS THE INCOMING REQUEST AND SPECIFIED MODEL NAME
+        # LOGS INCOMING REQUEST DETAILS FOR AUDITING
         logger.info(f"PREDICTION REQUEST RECEIVED FOR MODEL: {data.model}")
         
-        # VALIDATES IF THE REQUESTED MODEL EXISTS IN THE LOADED MODELS
+        # VALIDATES IF REQUESTED MODEL EXISTS IN LOADED MODELS
         if data.model not in models:
-            raise HTTPException(status_code=400, detail="MODEL NOT SUPPORTED")  # RETURNS A 400 ERROR IF MODEL IS INVALID
+            raise HTTPException(status_code=400, detail="MODEL NOT SUPPORTED")  # REJECTS INVALID MODEL REQUESTS
         
-        model = models[data.model]  # RETRIEVES THE SELECTED MODEL FROM THE DICTIONARY
+        model = models[data.model]                          # RETRIEVES SELECTED MODEL FROM LOADED MODELS
 
-        # CALLS THE PREDICTION FUNCTION WITH TEXT INPUT, SELECTED MODEL, AND THE SHARED VECTORIZER
-        result = predict_news(data.text, model, vectorizer)  # HANDLES BOTH TRADITIONAL ML AND DL MODELS (ASSUMED INTERNALLY)
-
-        # GENERATES AN AI-BASED EXPLANATION USING THE LLM BASED ON THE PREDICTION RESULT
+        # EXECUTES NEWS CLASSIFICATION WITH SELECTED MODEL AND VECTORIZER
+        result = predict_news(data.text, model, vectorizer) # RETURNS PREDICTION AND CONFIDENCE
+        
+        # VALIDATES PRESENCE OF PREDICTION KEY IN RESULT
+        if "PREDICTION" not in result:
+            raise HTTPException(500, detail="CLASSIFICATION FAILED")  # HANDLES MALFORMED CLASSIFICATION OUTPUT
+        
+        # ENSURES PREDICTION VALUE IS VALID ('REAL'/'FAKE')
+        if result["PREDICTION"] not in ["REAL", "FAKE"]:
+            raise HTTPException(500, detail="INVALID PREDICTION LABEL")  # PREVENTS INCONSISTENT EXPLANATIONS
+        
+        # GENERATES HUMAN-READABLE EXPLANATION USING LLM
         explanation = llm_explainer.explain(data.text, result["PREDICTION"])
-        result["EXPLANATION"] = explanation  # ADDS THE EXPLANATION TO THE RESPONSE PAYLOAD
-
-        return result  # RETURNS THE FINAL PREDICTION OUTPUT INCLUDING THE EXPLANATION
+        
+        # FALLBACK FOR EMPTY LLM OUTPUT
+        if not explanation.strip():
+            logger.error("LLM EXPLANATION EMPTY")
+            explanation = "AI EXPLANATION UNAVAILABLE!"
+        
+        # ENSURES EXPLANATION CONTAINS STANDARD DISCLAIMER
+        if "(SOURCE:" not in explanation:
+            explanation += " (SOURCE: AI FACT-CHECKING SYSTEM)"
+        
+        # ADDS EXPLANATION TO FINAL RESPONSE PAYLOAD
+        result["EXPLANATION"] = explanation
+        logger.info(f"FULL RESPONSE: {result}")             # LOGS COMPLETE RESPONSE FOR DEBUGGING
+        
+        return result                                       # RETURNS STRUCTURED JSON RESPONSE
     
     except HTTPException as he:
-        raise he  # RETHROWS ANY EXPLICITLY RAISED HTTP EXCEPTIONS (E.G., INVALID MODEL)
+        raise he                                            # PROPAGATES CONTROLLED HTTP ERRORS
     
     except Exception as e:
-        # LOGS UNEXPECTED ERRORS DURING THE PREDICTION PROCESS
-        logger.error(f"PREDICTION FAILED --> {e}")
-        raise HTTPException(status_code=500, detail="PREDICTION ERROR")  # RETURNS A 500 ERROR FOR UNHANDLED FAILURES
+        # LOGS UNEXPECTED ERRORS WITH STACK TRACE
+        logger.error(f"PREDICTION FAILED: {str(e)}", exc_info=True)
+        raise HTTPException(500, detail="PREDICTION ERROR") from e  # RETURNS GENERIC ERROR TO CLIENT

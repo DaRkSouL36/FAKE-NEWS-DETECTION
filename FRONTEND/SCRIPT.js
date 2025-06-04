@@ -2,43 +2,47 @@
 // GLOBAL ELEMENT HOOKS
 // =====================
 // SELECTS AND STORES REFERENCES TO ALL MAJOR DOM ELEMENTS FOR INTERACTION
-const newsInput = document.getElementById("newsInput"); // TEXTAREA FOR NEWS ARTICLE INPUT
-const resultEl = document.getElementById("resultContainer"); // CONTAINER TO DISPLAY ANALYSIS RESULT
-const micBtn = document.getElementById("micBtn"); // MICROPHONE BUTTON FOR VOICE INPUT
-const analyzeBtn = document.getElementById("analyzeBtn"); // BUTTON TO TRIGGER ANALYSIS
-const modelSelect = document.getElementById("modelSelect"); // DROPDOWN TO SELECT ML MODEL
-const themeToggle = document.getElementById("themeToggle"); // BUTTON TO TOGGLE THEME
-const feedbackToggle = document.getElementById("feedbackToggle"); // BUTTON TO OPEN FEEDBACK MODAL
-const feedbackModal = document.getElementById("feedbackModal"); // FEEDBACK MODAL DIALOG
-const closeModal = document.getElementById("closeModal"); // BUTTON TO CLOSE FEEDBACK MODAL
-const submitFeedback = document.getElementById("submitFeedback"); // BUTTON TO SUBMIT FEEDBACK
-const navToggle = document.getElementById("navToggle"); // HAMBURGER MENU BUTTON FOR MOBILE NAV
-const navControls = document.getElementById("navControls"); // NAVIGATION CONTROLS CONTAINER
-
-// HOOKS FOR EXPLANATION TEXTAREA AND COPY BUTTON
-const explanationBox = document.getElementById("explanationBox"); // TEXTAREA TO DISPLAY LLM EXPLANATION
-const copyExplanationBtn = document.getElementById("copyExplanationBtn"); // BUTTON TO COPY EXPLANATION
+const newsInput = document.getElementById("newsInput");
+const resultEl = document.getElementById("resultContainer");
+const micBtn = document.getElementById("micBtn");
+const analyzeBtn = document.getElementById("analyzeBtn");
+const modelSelect = document.getElementById("modelSelect");
+const themeToggle = document.getElementById("themeToggle");
+const feedbackToggle = document.getElementById("feedbackToggle");
+const feedbackModal = document.getElementById("feedbackModal");
+const closeModal = document.getElementById("closeModal");
+const submitFeedback = document.getElementById("submitFeedback");
+const navToggle = document.getElementById("navToggle");
+const navControls = document.getElementById("navControls");
+const explanationBox = document.getElementById("explanationBox");
+const copyExplanationBtn = document.getElementById("copyExplanationBtn");
 
 // =====================
 // CONFIGURABLE API ENDPOINT
 // =====================
-// DEFINES THE BASE URL FOR API REQUESTS (RELATIVE FOR DEPLOYMENT)
 const API_BASE = "http://127.0.0.1:8000";
-
-// FUNCTION TO CONSTRUCT THE API URL (NO LONGER NEEDS MODEL AS QUERY PARAM)
 function getApiUrl() {
   return `${API_BASE}/api/PREDICT`;
 }
 
 // =====================
-// 1. ANALYZE BUTTON LOGIC
+// AUTO-RESIZE EXPLANATION BOX ON INPUT OR VALUE CHANGE
 // =====================
-// HANDLES CLICK EVENT FOR ANALYZE BUTTON TO SUBMIT NEWS TEXT FOR ANALYSIS
-analyzeBtn.addEventListener("click", async () => {
-  const text = newsInput.value.trim(); // GETS USER INPUT
-  const model = modelSelect.value; // GETS SELECTED MODEL
+if (explanationBox) {
+  explanationBox.addEventListener("input", () => {
+    explanationBox.style.height = "auto";
+    explanationBox.style.height = `${explanationBox.scrollHeight}px`;
+  });
+}
 
-  // IF INPUT IS EMPTY, SHOW WARNING AND EXIT
+// =====================
+// ANALYZE BUTTON LOGIC
+// =====================
+analyzeBtn.addEventListener("click", async () => {
+  const text = newsInput.value.trim();
+  const model = modelSelect.value;
+
+  // GUARD CLAUSE: IF INPUT IS EMPTY, SHOW WARNING AND EXIT
   if (!text) {
     resultEl.innerHTML =
       '<span class="warning-text">⚠️ PLEASE ENTER SOME TEXT TO ANALYZE.</span>';
@@ -64,24 +68,21 @@ analyzeBtn.addEventListener("click", async () => {
       body: JSON.stringify({ text, model }),
     });
 
-    // IF RESPONSE IS NOT OK, THROW ERROR
     if (!response.ok) {
       throw new Error(`API RESPONDED WITH STATUS ${response.status}`);
     }
 
-    const result = await response.json(); // PARSE API RESPONSE
+    const result = await response.json();
 
-    // NEW DEBUG LOGS
+    // DEBUG LOGS FOR API RESPONSE
     console.log(
       "RAW EXPLANATION RECEIVED:",
       result.EXPLANATION || result.explanation
     );
     console.log("POPULATING explanationBox...");
-
-    // LOGS THE RAW API RESPONSE FOR DEBUGGING
     console.log("API RESPONSE:", result);
 
-    // IF RESULT IS VALID, DISPLAY PREDICTION AND CONFIDENCE
+    // DISPLAY PREDICTION AND CONFIDENCE IF RESULT IS VALID
     if (
       result &&
       typeof result.PREDICTION === "string" &&
@@ -94,25 +95,21 @@ analyzeBtn.addEventListener("click", async () => {
         <strong>CONFIDENCE:</strong> ${(result.CONFIDENCE * 100).toFixed(2)}%
       `;
 
-      // FIELD NAME SAFETY: ACCEPTS BOTH UPPERCASE AND LOWERCASE KEYS
+      // EXPLANATION HANDLING
       let explanation = result.EXPLANATION || result.explanation || "";
-
-      // FALLBACK IF EXPLANATION IS EMPTY OR TOO SHORT
       if (typeof explanation === "string" && explanation.trim().length > 0) {
         explanationBox.value = explanation.trim();
-        explanationBox.style.display = "block";
-        explanationBox.classList.add("filled");
-        explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
-        explanationBox.focus();
+        explanationBox.dispatchEvent(new Event("input"));
       } else {
         explanationBox.value = "NO EXPLANATION AVAILABLE.";
-        explanationBox.style.display = "block";
-        explanationBox.classList.add("filled");
-        explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
-        explanationBox.focus();
+        explanationBox.dispatchEvent(new Event("input"));
       }
+      explanationBox.style.display = "block";
+      explanationBox.classList.add("filled");
+      explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      explanationBox.focus();
     } else {
-      // IF RESULT IS INVALID, SHOW ERROR
+      // INVALID RESULT HANDLING
       resultEl.innerHTML =
         '<span class="error-text">⚠️ INVALID DATA RECEIVED FROM API.</span>';
       if (explanationBox) {
@@ -137,9 +134,8 @@ analyzeBtn.addEventListener("click", async () => {
 });
 
 // =====================
-// 1B. COPY EXPLANATION BUTTON LOGIC
+// COPY EXPLANATION BUTTON LOGIC
 // =====================
-// HANDLES CLICK EVENT FOR COPY BUTTON TO COPY EXPLANATION TO CLIPBOARD
 if (copyExplanationBtn && explanationBox) {
   copyExplanationBtn.addEventListener("click", async () => {
     explanationBox.select();
@@ -162,29 +158,25 @@ if (copyExplanationBtn && explanationBox) {
 }
 
 // =====================
-// 2. VOICE INPUT (SPEECH-TO-TEXT)
+// VOICE INPUT (SPEECH-TO-TEXT)
 // =====================
-// ENABLES VOICE INPUT USING WEBKIT SPEECH RECOGNITION IF SUPPORTED
 let recognition;
 if ("webkitSpeechRecognition" in window) {
   recognition = new webkitSpeechRecognition();
-  recognition.continuous = false; // SINGLE PHRASE RECOGNITION
-  recognition.lang = "en-US"; // LANGUAGE SET TO ENGLISH
-  recognition.interimResults = false; // ONLY FINAL RESULTS
+  recognition.continuous = false;
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
 
-  // WHEN RECOGNITION STARTS, CHANGE MIC ICON AND DISABLE BUTTON
   recognition.onstart = () => {
     micBtn.innerHTML = `<i class="fas fa-wave-square"></i>`;
     micBtn.disabled = true;
   };
 
-  // WHEN RECOGNITION ENDS, RESTORE MIC ICON AND ENABLE BUTTON
   recognition.onend = () => {
     micBtn.innerHTML = `<i class="fas fa-microphone"></i>`;
     micBtn.disabled = false;
   };
 
-  // ON ERROR, SHOW ERROR MESSAGE AND ENABLE BUTTON
   recognition.onerror = (event) => {
     console.error("SPEECH RECOGNITION ERROR:", event.error);
     resultEl.innerHTML =
@@ -193,7 +185,6 @@ if ("webkitSpeechRecognition" in window) {
     micBtn.disabled = false;
   };
 
-  // ON SUCCESSFUL RESULT, POPULATE TEXTAREA AND SHOW CAPTURED INPUT
   recognition.onresult = (event) => {
     const transcript = event.results[0][0].transcript;
     newsInput.value = transcript;
@@ -203,7 +194,6 @@ if ("webkitSpeechRecognition" in window) {
     animateResult();
   };
 } else {
-  // IF NOT SUPPORTED, HIDE MIC BUTTON
   micBtn.style.display = "none";
   console.warn("SPEECH RECOGNITION NOT SUPPORTED IN THIS BROWSER.");
 }
@@ -214,31 +204,28 @@ micBtn.addEventListener("click", () => {
 });
 
 // =====================
-// 3. DARK / LIGHT MODE TOGGLE
+// DARK / LIGHT MODE TOGGLE
 // =====================
-// HANDLES THEME SWITCHING BETWEEN DARK AND LIGHT MODES
 function applyTheme(theme) {
   const isLight = theme === "light";
-  document.body.classList.toggle("light-mode", isLight); // TOGGLES LIGHT MODE CLASS
-  themeToggle.innerHTML = `<i class="fas fa-${isLight ? "sun" : "moon"}"></i>`; // UPDATES ICON
-  localStorage.setItem("theme", theme); // STORES USER PREFERENCE
+  document.body.classList.toggle("light-mode", isLight);
+  themeToggle.innerHTML = `<i class="fas fa-${isLight ? "sun" : "moon"}"></i>`;
+  localStorage.setItem("theme", theme);
 }
 
 // INITIALIZE THEME FROM LOCAL STORAGE OR DEFAULT TO DARK
 const storedTheme = localStorage.getItem("theme") || "dark";
 applyTheme(storedTheme);
 
-// ON THEME TOGGLE BUTTON CLICK, SWITCH THEME
 themeToggle.addEventListener("click", () => {
   const isLight = document.body.classList.contains("light-mode");
   applyTheme(isLight ? "dark" : "light");
 });
 
 // =====================
-// 4. FEEDBACK FORM MODAL WITH ACCESSIBILITY
+// FEEDBACK FORM MODAL WITH ACCESSIBILITY
 // =====================
-// HANDLES OPENING, CLOSING, AND ACCESSIBILITY FOR THE FEEDBACK MODAL
-let lastActiveElement = null; // STORES LAST FOCUSED ELEMENT BEFORE MODAL OPENS
+let lastActiveElement = null;
 
 // FUNCTION TO OPEN MODAL AND TRAP FOCUS
 function openModal() {
@@ -297,7 +284,6 @@ function trapFocus(modal) {
   }
 
   modal.addEventListener("keydown", handleTab);
-  // REMOVE FOCUS TRAP LISTENER ON MODAL CLOSE
   closeModal.addEventListener("click", () => {
     modal.removeEventListener("keydown", handleTab);
   });
@@ -309,13 +295,11 @@ submitFeedback.addEventListener("click", async () => {
   const like = document.getElementById("feedbackLike").value.trim();
   const improve = document.getElementById("feedbackImprove").value.trim();
 
-  // IF ANY FIELD IS EMPTY, SHOW ERROR TOAST
   if (!rating || !like || !improve) {
     showToast("⚠️ PLEASE COMPLETE ALL FEEDBACK FIELDS.", "error");
     return;
   }
 
-  // SIMULATE SENDING FEEDBACK TO BACKEND (REPLACE WITH REAL API CALL IF NEEDED)
   try {
     await new Promise((res) => setTimeout(res, 500)); // SIMULATED DELAY
     showToast("✅ THANK YOU FOR YOUR FEEDBACK!", "success");
@@ -354,14 +338,12 @@ function showToast(msg, type = "info") {
 // =====================
 // 5. MOBILE NAV TOGGLE
 // =====================
-// HANDLES SHOW/HIDE OF NAVIGATION CONTROLS ON MOBILE VIA HAMBURGER BUTTON
 if (navToggle && navControls) {
   navToggle.addEventListener("click", () => {
     const navbar = navToggle.closest(".navbar");
     const expanded = navToggle.getAttribute("aria-expanded") === "true";
-    navToggle.setAttribute("aria-expanded", !expanded); // TOGGLE ARIA ATTRIBUTE
-    navbar.classList.toggle("open"); // TOGGLE MENU VISIBILITY
-    // FOCUS FIRST NAV CONTROL ON OPEN FOR ACCESSIBILITY
+    navToggle.setAttribute("aria-expanded", !expanded);
+    navbar.classList.toggle("open");
     if (!expanded) {
       setTimeout(() => {
         const firstNav = navControls.querySelector("select,button");
@@ -372,7 +354,7 @@ if (navToggle && navControls) {
 }
 
 // =====================
-// 6. UTILITIES
+// UTILITIES
 // =====================
 // UTILITY FUNCTION TO SHOW RESULT CONTAINER WITH ARIA ATTRIBUTES
 function showResult() {

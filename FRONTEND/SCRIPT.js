@@ -18,6 +18,10 @@ const explanationBox = document.getElementById("explanationBox");
 const copyExplanationBtn = document.getElementById("copyExplanationBtn");
 const clearNewsBtn = document.getElementById("clearNewsBtn");
 const clearExplanationBtn = document.getElementById("clearExplanationBtn");
+const toggleExplanationBtn = document.getElementById("toggleExplanationBtn");
+const explanationBoxContainer = document.getElementById(
+  "explanationBoxContainer"
+);
 
 // =====================
 // CONFIGURABLE API ENDPOINT
@@ -58,6 +62,29 @@ if (clearExplanationBtn && explanationBox) {
     explanationBox.classList.remove("filled");
     explanationBox.style.height = "auto";
     explanationBox.focus();
+  });
+}
+
+// =====================
+// TOGGLE EXPLANATION BOX FUNCTIONALITY
+// =====================
+
+// TRACKS WHETHER THE EXPLANATION IS EXPANDED
+let explanationExpanded = true;
+
+if (toggleExplanationBtn && explanationBoxContainer) {
+  toggleExplanationBtn.addEventListener("click", () => {
+    explanationExpanded = !explanationExpanded;
+
+    // TOGGLE A CLASS TO COLLAPSE/EXPAND THE CONTAINER
+    explanationBoxContainer.classList.toggle("collapsed", !explanationExpanded);
+
+    // UPDATE THE ICON DIRECTION
+    toggleExplanationBtn.innerHTML = explanationExpanded
+      ? '<i class="fas fa-chevron-up"></i>'
+      : '<i class="fas fa-chevron-down"></i>';
+    // ARIA-EXPANDED FOR ACCESSIBILITY
+    toggleExplanationBtn.setAttribute("aria-expanded", explanationExpanded);
   });
 }
 

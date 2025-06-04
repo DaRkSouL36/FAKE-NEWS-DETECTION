@@ -36,19 +36,19 @@
     <!-- STYLES: IMPORT ALL CSS MODULES IN ORDER -->
 
     <!-- BASE STYLES: RESET, VARIABLES, TYPOGRAPHY, ETC. -->
-    <link rel="stylesheet" href="STYLE_BASE.css" />
+    <link rel="stylesheet" href="CSS/STYLE_BASE.css" />
 
     <!-- LAYOUT STYLES: NAVBAR, HERO, OVERLAY, RESPONSIVE, ETC. -->
-    <link rel="stylesheet" href="STYLE_LAYOUT.css" />
+    <link rel="stylesheet" href="CSS/STYLE_LAYOUT.css" />
 
     <!-- COMPONENT STYLES: BUTTONS, TEXTAREA, MIC, ETC. -->
-    <link rel="stylesheet" href="STYLE_COMPONENTS.css" />
+    <link rel="stylesheet" href="CSS/STYLE_COMPONENTS.css" />
 
     <!-- MODAL STYLES: FEEDBACK MODAL, MODAL CONTENT, MODAL ANIMATIONS -->
-    <link rel="stylesheet" href="STYLE_MODALS.css" />
+    <link rel="stylesheet" href="CSS/STYLE_MODALS.css" />
 
     <!-- EXPLANATION & RESULT STYLES: EXPLANATION AREA, COPY BUTTON, RESULT CONTAINER -->
-    <link rel="stylesheet" href="STYLE_EXPLANATION.css" />
+    <link rel="stylesheet" href="CSS/STYLE_EXPLANATION.css" />
   </head>
 
   <body>
@@ -136,7 +136,7 @@
             </button>
             <button
               id="micBtn"
-              class="button mic-button"
+              class="mic-button"
               aria-label="Voice Input"
               type="button"
             >
@@ -164,7 +164,7 @@
 
         <!-- EXPLANATION AREA: STYLED CONTAINER FOR EXPLANATION BOX AND OVERLAPPING COPY BUTTON -->
         <div class="explanation-area">
-          <div class="explanation-box-container">
+          <div class="explanation-box-container" id="explanationBoxContainer">
             <!-- STYLED CONTAINER FOR EXPLANATION BOX -->
             <label for="explanationBox" class="explanation-label"
               ><strong>EXPLANATION:</strong></label
@@ -198,6 +198,16 @@
               <i class="fas fa-times"></i>
             </button>
           </div>
+          <!-- EXPAND/COLLAPSE TOGGLE BUTTON FOR EXPLANATION -->
+          <button
+            id="toggleExplanationBtn"
+            class="toggle-explanation-btn"
+            type="button"
+            aria-label="Expand/collapse explanation"
+            title="Expand/collapse explanation"
+          >
+            <i class="fas fa-chevron-up"></i>
+          </button>
         </div>
         <!-- END EXPLANATION AREA -->
       </section>

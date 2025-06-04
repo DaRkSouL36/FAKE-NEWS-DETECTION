@@ -128,6 +128,20 @@
     bottom: -26px;
     font-size: 1.4rem;
   }
+  .explanation-area {
+    max-width: 98vw;
+  }
+  .explanation-box-container {
+    padding: 20px 10px 20px 10px;
+    max-width: 98vw;
+  }
+  .copy-explanation-btn {
+    width: 52px;
+    height: 52px;
+    left: -26px;
+    bottom: -26px;
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -157,6 +171,19 @@
   #modelSelect {
     font-size: 0.98rem;
     padding: 7px 10px;
+  }
+  .explanation-box-container {
+    padding: 10px 3px 10px 3px;
+  }
+  .copy-explanation-btn {
+    width: 38px;
+    height: 38px;
+    left: -13px;
+    bottom: -13px;
+    font-size: 1.1rem;
+  }
+  .explanation-area {
+    max-width: 99vw;
   }
 }
 

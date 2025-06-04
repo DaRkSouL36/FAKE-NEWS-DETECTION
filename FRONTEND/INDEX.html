@@ -145,29 +145,35 @@
           aria-atomic="true"
         ></div>
         <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
-        
-        <!-- EXPLANATION BOX: SHOWS LLM-GENERATED EXPLANATION WITH COPY BUTTON -->
-        <div id="explanationContainer" class="explanation-container">
-          <label for="explanationBox"><strong>EXPLANATION:</strong></label>
-          <textarea
-            id="explanationBox"
-            class="explanation-box"
-            readonly
-            rows="4"
-            aria-label="AI-generated factuality explanation"
-            placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
-          ></textarea>
-          <!-- COPY BUTTON FOR EXPLANATION -->
-          <button
-            id="copyExplanationBtn"
-            class="button copy-btn"
-            type="button"
-            aria-label="Copy explanation"
-          >
-            <i class="fas fa-copy"></i> COPY EXPLANATION
-          </button>
+
+        <!-- EXPLANATION AREA: STYLED CONTAINER FOR EXPLANATION BOX AND OVERLAPPING COPY BUTTON -->
+        <div class="explanation-area">
+          <div class="explanation-box-container">
+            <!-- STYLED CONTAINER FOR EXPLANATION BOX -->
+            <label for="explanationBox" class="explanation-label"
+              ><strong>EXPLANATION:</strong></label
+            >
+            <textarea
+              id="explanationBox"
+              class="explanation-box"
+              readonly
+              rows="4"
+              aria-label="AI-generated factuality explanation"
+              placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
+            ></textarea>
+            <!-- OVERLAPPING COPY BUTTON AS AN ICON, CUTTING INTO THE EXPLANATION BOX -->
+            <button
+              id="copyExplanationBtn"
+              class="copy-explanation-btn"
+              type="button"
+              aria-label="Copy explanation"
+              title="Copy explanation"
+            >
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
         </div>
-        <!-- END EXPLANATION BOX -->
+        <!-- END EXPLANATION AREA -->
       </section>
 
       <!-- SCROLL HINT -->

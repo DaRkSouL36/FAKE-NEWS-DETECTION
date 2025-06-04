@@ -43,7 +43,10 @@ analyzeBtn.addEventListener("click", async () => {
     resultEl.innerHTML =
       '<span class="warning-text">⚠️ PLEASE ENTER SOME TEXT TO ANALYZE.</span>';
     showResult();
-    if (explanationBox) explanationBox.value = "";
+    if (explanationBox) {
+      explanationBox.classList.remove("filled");
+      explanationBox.value = "";
+    }
     return;
   }
 
@@ -68,6 +71,13 @@ analyzeBtn.addEventListener("click", async () => {
 
     const result = await response.json(); // PARSE API RESPONSE
 
+    // NEW DEBUG LOGS
+    console.log(
+      "RAW EXPLANATION RECEIVED:",
+      result.EXPLANATION || result.explanation
+    );
+    console.log("POPULATING explanationBox...");
+
     // LOGS THE RAW API RESPONSE FOR DEBUGGING
     console.log("API RESPONSE:", result);
 
@@ -88,25 +98,37 @@ analyzeBtn.addEventListener("click", async () => {
       let explanation = result.EXPLANATION || result.explanation || "";
 
       // FALLBACK IF EXPLANATION IS EMPTY OR TOO SHORT
-      if (explanationBox) {
-        if (typeof explanation === "string" && explanation.trim().length > 0) {
-          explanationBox.value = explanation.trim();
-        } else {
-          explanationBox.value = "NO EXPLANATION AVAILABLE.";
-        }
+      if (typeof explanation === "string" && explanation.trim().length > 0) {
+        explanationBox.value = explanation.trim();
+        explanationBox.style.display = "block";
+        explanationBox.classList.add("filled");
+        explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
+        explanationBox.focus();
+      } else {
+        explanationBox.value = "NO EXPLANATION AVAILABLE.";
+        explanationBox.style.display = "block";
+        explanationBox.classList.add("filled");
+        explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
+        explanationBox.focus();
       }
     } else {
       // IF RESULT IS INVALID, SHOW ERROR
       resultEl.innerHTML =
         '<span class="error-text">⚠️ INVALID DATA RECEIVED FROM API.</span>';
-      if (explanationBox) explanationBox.value = "";
+      if (explanationBox) {
+        explanationBox.classList.remove("filled");
+        explanationBox.value = "";
+      }
     }
   } catch (err) {
     // ON ERROR, SHOW ERROR MESSAGE
     console.error("API ERROR:", err);
     resultEl.innerHTML =
       '<span class="error-text">❌ ERROR CONTACTING THE API. PLEASE TRY AGAIN LATER.</span>';
-    if (explanationBox) explanationBox.value = "";
+    if (explanationBox) {
+      explanationBox.classList.remove("filled");
+      explanationBox.value = "";
+    }
   } finally {
     newsInput.focus();
     analyzeBtn.disabled = false;
@@ -138,8 +160,6 @@ if (copyExplanationBtn && explanationBox) {
     explanationBox.blur();
   });
 }
-
-// ... (rest of your code unchanged)
 
 // =====================
 // 2. VOICE INPUT (SPEECH-TO-TEXT)

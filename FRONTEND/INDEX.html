@@ -17,7 +17,7 @@
     <!-- TITLE OF THE WEBSITE SHOWN IN THE BROWSER TAB -->
 
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="BACKGROUND/DaRkSouL.png" />
     <!-- SETS THE WEBSITE'S ICON IN THE BROWSER TAB -->
 
     <!-- GOOGLE FONTS & ICONS -->
@@ -50,7 +50,7 @@
     <!-- BACKGROUND VIDEO LAYER -->
     <video autoplay muted loop playsinline id="background-video">
       <!-- PLAYS A LOOPING, MUTED BACKGROUND VIDEO FOR A MODERN VISUAL EFFECT -->
-      <source src="BACKGROUND/background.mp4" type="video/mp4" />
+      <source src="BACKGROUND/DaRkSouL.mp4" type="video/mp4" />
       <!-- PROVIDES THE VIDEO FILE (USE RELATIVE PATH FOR DEPLOYMENT) -->
       YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.
       <!-- FALLBACK TEXT IF VIDEO IS NOT SUPPORTED -->
@@ -145,35 +145,35 @@
           aria-atomic="true"
         ></div>
         <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
+        
+        <!-- EXPLANATION BOX: SHOWS LLM-GENERATED EXPLANATION WITH COPY BUTTON -->
+        <div id="explanationContainer" class="explanation-container">
+          <label for="explanationBox"><strong>EXPLANATION:</strong></label>
+          <textarea
+            id="explanationBox"
+            class="explanation-box"
+            readonly
+            rows="4"
+            aria-label="AI-generated factuality explanation"
+            placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
+          ></textarea>
+          <!-- COPY BUTTON FOR EXPLANATION -->
+          <button
+            id="copyExplanationBtn"
+            class="button copy-btn"
+            type="button"
+            aria-label="Copy explanation"
+          >
+            <i class="fas fa-copy"></i> COPY EXPLANATION
+          </button>
+        </div>
+        <!-- END EXPLANATION BOX -->
       </section>
 
       <!-- SCROLL HINT -->
       <div class="scroll-indicator" aria-hidden="true">▼</div>
       <!-- DECORATIVE SCROLL INDICATOR TO ENCOURAGE USERS TO SCROLL DOWN -->
     </div>
-
-    <!-- EXPLANATION BOX: SHOWS LLM-GENERATED EXPLANATION WITH COPY BUTTON -->
-    <div id="explanationContainer" class="explanation-container">
-      <label for="explanationBox"><strong>EXPLANATION:</strong></label>
-      <textarea
-        id="explanationBox"
-        class="explanation-box"
-        readonly
-        rows="4"
-        aria-label="AI-generated factuality explanation"
-        placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
-      ></textarea>
-      <!-- COPY BUTTON FOR EXPLANATION -->
-      <button
-        id="copyExplanationBtn"
-        class="button copy-btn"
-        type="button"
-        aria-label="Copy explanation"
-      >
-        <i class="fas fa-copy"></i> COPY EXPLANATION
-      </button>
-    </div>
-    <!-- END EXPLANATION BOX -->
 
     <!-- FEEDBACK BUTTON FLOATING AT BOTTOM RIGHT -->
     <button

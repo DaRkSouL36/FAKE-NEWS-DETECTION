@@ -345,12 +345,18 @@ body.light-mode .modal-content textarea {
   padding: 12px;
   font-size: 1rem;
   font-family: inherit;
-  resize: none;
+  resize: vertical;
   margin-top: 4px;
   font-style: italic;
   letter-spacing: 0.5px;
   min-height: 72px;
-  transition: background 0.3s, color 0.3s, border 0.3s;
+  opacity: 1;
+  display: block;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.6s;
+}
+
+.explanation-box.filled {
+  box-shadow: 0 0 20px #0ff8;
 }
 
 /* LIGHT THEME OVERRIDE */

@@ -16,6 +16,8 @@ const navToggle = document.getElementById("navToggle");
 const navControls = document.getElementById("navControls");
 const explanationBox = document.getElementById("explanationBox");
 const copyExplanationBtn = document.getElementById("copyExplanationBtn");
+const clearNewsBtn = document.getElementById("clearNewsBtn");
+const clearExplanationBtn = document.getElementById("clearExplanationBtn");
 
 // =====================
 // CONFIGURABLE API ENDPOINT
@@ -32,6 +34,30 @@ if (explanationBox) {
   explanationBox.addEventListener("input", () => {
     explanationBox.style.height = "auto";
     explanationBox.style.height = `${explanationBox.scrollHeight}px`;
+  });
+}
+
+// =====================
+// CLEAR NEWS INPUT FUNCTIONALITY
+// =====================
+
+if (clearNewsBtn && newsInput) {
+  clearNewsBtn.addEventListener("click", () => {
+    newsInput.value = "";
+    newsInput.focus();
+  });
+}
+
+// =====================
+// CLEAR EXPLANATION BOX FUNCTIONALITY
+// =====================
+
+if (clearExplanationBtn && explanationBox) {
+  clearExplanationBtn.addEventListener("click", () => {
+    explanationBox.value = "";
+    explanationBox.classList.remove("filled");
+    explanationBox.style.height = "auto";
+    explanationBox.focus();
   });
 }
 

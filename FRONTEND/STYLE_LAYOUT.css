@@ -1,4 +1,7 @@
-/* NAVBAR */
+/* ===========================
+   NAVBAR
+   =========================== */
+
 /* FLEX CONTAINER FOR LOGO, NAV TOGGLE, AND CONTROLS */
 .navbar {
   display: flex;
@@ -43,7 +46,9 @@
   transition: all 0.3s;
 }
 
-/* MOBILE NAV TOGGLE */
+/* ===========================
+   MOBILE NAV TOGGLE
+   =========================== */
 /* SHOWS NAV TOGGLE AND DROPDOWN MENU ON SMALL SCREENS */
 @media (max-width: 768px) {
   .nav-toggle {
@@ -79,21 +84,27 @@
   transition: color 0.3s;
 }
 
-/* ACTION BUTTONS: CENTERED BELOW TEXTAREA */
+/* ===========================
+   ACTION BUTTONS: CENTERED BELOW TEXTAREA
+   =========================== */
 .action-buttons {
   margin-top: 20px;
   display: flex;
   justify-content: center;
 }
 
-/* ADJUST TEXTAREA CONTAINER TO RELATIVE FOR POSITIONING MIC BUTTON */
+/* ===========================
+   TEXTAREA CONTAINER: RELATIVE FOR MIC BUTTON
+   =========================== */
 .textarea-container {
   position: relative;
   max-width: 700px;
   margin: 0 auto;
 }
 
-/* SCROLL INDICATOR: BOUNCING ARROW FOR USER HINT */
+/* ===========================
+   SCROLL INDICATOR: BOUNCING ARROW FOR USER HINT
+   =========================== */
 .scroll-indicator {
   font-size: 2rem;
   animation: bounce 1.5s infinite;
@@ -101,12 +112,16 @@
   color: #0ff;
 }
 
-/* HIDDEN CLASS: UTILITY TO HIDE ELEMENTS */
+/* ===========================
+   HIDDEN CLASS: UTILITY TO HIDE ELEMENTS
+   =========================== */
 .hidden {
   display: none !important;
 }
 
-/* RESPONSIVE: MODAL & TEXTAREA FOR SMALL SCREENS */
+/* ===========================
+   RESPONSIVE: MODAL, TEXTAREA, EXPLANATION, AND BUTTONS
+   =========================== */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
@@ -187,7 +202,9 @@
   }
 }
 
-/* CUSTOM SCROLLBAR FOR MODERN LOOK */
+/* ===========================
+   CUSTOM SCROLLBAR FOR MODERN LOOK
+   =========================== */
 ::-webkit-scrollbar {
   width: 10px;
   background: #191919;
@@ -198,4 +215,83 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #0cf, #0ff 70%);
+}
+
+/* ===========================
+   LIGHT MODE: LAYOUT AND CONTAINERS
+   =========================== */
+
+body.light-mode .modal-content {
+  background: #fff;
+  color: #1a2533;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #0cf1;
+}
+
+body.light-mode #background-video {
+  filter: brightness(0.95);
+  background: #e9f4fa;
+}
+
+body.light-mode .action-buttons {
+  background: transparent;
+}
+
+body.light-mode .feedback-button {
+  background: linear-gradient(45deg, #7ee8fa, #0cf 60%);
+  color: #222d3a;
+  box-shadow: 0 2px 12px #0cf2;
+}
+
+body.light-mode .feedback-button:hover,
+body.light-mode .feedback-button:focus {
+  background: linear-gradient(45deg, #0cf, #7ee8fa 80%);
+  color: #fff;
+  box-shadow: 0 4px 20px #0cf6;
+}
+
+/* ===========================
+   STRUCTURED VERTICAL SPACING BETWEEN MAIN COMPONENTS
+   =========================== */
+
+/* ADDS VERTICAL SPACING BELOW EACH MAJOR UI BLOCK */
+.model-select-row,
+.textarea-container,
+#resultContainer,
+.explanation-area,
+.action-buttons {
+  margin-bottom: 32px;
+}
+
+/* ADD TOP MARGIN TO THE FIRST MAIN CONTAINER FOR BREATHING ROOM */
+.textarea-container {
+  margin-top: 24px;
+}
+
+/* RESPONSIVE: REDUCE SPACING ON TABLETS */
+@media (max-width: 768px) {
+  .model-select-row,
+  .textarea-container,
+  #resultContainer,
+  .explanation-area,
+  .action-buttons {
+    margin-bottom: 18px;
+  }
+  .textarea-container {
+    margin-top: 14px;
+  }
+}
+
+/* RESPONSIVE: FURTHER REDUCE SPACING ON SMALL PHONES */
+@media (max-width: 480px) {
+  .model-select-row,
+  .textarea-container,
+  #resultContainer,
+  .explanation-area,
+  .action-buttons {
+    margin-bottom: 10px;
+  }
+  .textarea-container {
+    margin-top: 8px;
+  }
 }

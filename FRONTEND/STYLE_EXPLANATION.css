@@ -1,0 +1,159 @@
+/* ===========================
+   EXPLANATION AREA & OVERLAPPING COPY BUTTON
+   =========================== */
+
+/* OUTER CONTAINER FOR EXPLANATION AREA, CENTERS AND SPACES CONTENT */
+.explanation-area {
+  max-width: 700px;
+  margin: 24px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* STYLED CONTAINER FOR EXPLANATION BOX AND OVERLAPPING BUTTON */
+.explanation-box-container {
+  position: relative;
+  background: #111;
+  border-radius: 18px;
+  padding: 30px 24px 30px 24px;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #0ff2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* LABEL FOR EXPLANATION BOX */
+.explanation-label {
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* READONLY TEXTAREA FOR EXPLANATION */
+.explanation-box {
+  width: 100%;
+  background: transparent;
+  color: #0ff;
+  border: none;
+  resize: vertical;
+  font-size: 1.1rem;
+  min-height: 90px;
+  outline: none;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  font-style: italic;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.6s;
+  box-sizing: border-box;
+}
+
+/* FILLED STATE FOR FADE-IN EFFECT */
+.explanation-box.filled {
+  box-shadow: 0 0 20px #0ff8;
+}
+
+/* COPY BUTTON OVERLAPS LOWER LEFT CORNER OF EXPLANATION BOX CONTAINER */
+.copy-explanation-btn {
+  position: absolute;
+  left: -32px;
+  bottom: -32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #0ff;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #f0f;
+  color: #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  z-index: 10;
+}
+
+.copy-explanation-btn:hover,
+.copy-explanation-btn:focus {
+  background: #0ff;
+  color: #111;
+  box-shadow: 0 0 24px #0ff, 0 0 36px #f0f;
+  outline: none;
+}
+
+.copy-explanation-btn i {
+  font-size: 1.5rem;
+}
+
+/* ===========================
+   LIGHT THEME OVERRIDES FOR EXPLANATION AREA
+   =========================== */
+
+/* CONTAINER BACKGROUND AND SHADOW IN LIGHT MODE */
+body.light-mode .explanation-box-container {
+  background: #f8fafd;
+  box-shadow: 0 0 18px #0cf, 0 0 32px #0cf2;
+}
+
+/* TEXTAREA COLOR IN LIGHT MODE */
+body.light-mode .explanation-box {
+  color: #007b8a;
+}
+
+/* COPY BUTTON COLORS IN LIGHT MODE */
+body.light-mode .copy-explanation-btn {
+  background: #f8fafd;
+  border-color: #0cf;
+  color: #0cf;
+}
+body.light-mode .copy-explanation-btn:hover,
+body.light-mode .copy-explanation-btn:focus {
+  background: #0cf;
+  color: #fff;
+}
+
+/* ===========================
+   RESULT CONTAINER
+   =========================== */
+
+/* CONTAINER FOR PREDICTION RESULT AND CONFIDENCE */
+#resultContainer {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease, opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+/* SHOWS RESULT WITH FADE-IN ANIMATION WHEN NOT HIDDEN */
+#resultContainer:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInResult 0.5s;
+}
+
+@keyframes fadeInResult {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* STRONG TAG IN RESULT CONTAINER: SMOOTH COLOR TRANSITION */
+#resultContainer strong {
+  transition: color 0.3s ease;
+}

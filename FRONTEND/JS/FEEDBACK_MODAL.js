@@ -85,7 +85,7 @@ submitFeedback.addEventListener("click", async () => {
   }
 });
 
-/ SHOWS A TOAST MESSAGE FOR FEEDBACK/SUCCESS/ERROR
+// SHOWS A TOAST MESSAGE FOR FEEDBACK/SUCCESS/ERROR
 function showToast(msg, type = "info") {
   const icon = getAnimatedStatusIcon(type) || getAnimatedStatusIcon("info");
   let toast = document.createElement("div");
@@ -94,7 +94,7 @@ function showToast(msg, type = "info") {
   toast.style.bottom = "50px";
   toast.style.left = "50%";
   toast.style.transform = "translateX(-50%)";
-  toast.style.background = toast.style.background =
+  toast.style.background =
     type === "success"
       ? "linear-gradient(90deg, #073042 0%, #0ff 100%)"
       : type === "error"

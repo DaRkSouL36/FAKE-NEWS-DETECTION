@@ -23,7 +23,6 @@
   align-items: stretch;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s,
     opacity 0.25s;
-  max-height: 200px;
   opacity: 1;
 }
 
@@ -61,6 +60,25 @@
   box-shadow: 0 0 20px #0ff8;
 }
 
+.explanation-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  font-size: 1.1rem;
+  color: #0ff;
+  background: transparent;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  box-shadow: 0 0 20px #0ff8;
+}
+.explanation-loader.hidden {
+  display: none;
+}
+
+.explanation-loader .loader {
+  margin-right: 12px;
+}
 /* COPY BUTTON OVERLAPS LOWER LEFT CORNER OF EXPLANATION BOX CONTAINER */
 .copy-explanation-btn {
   position: absolute;

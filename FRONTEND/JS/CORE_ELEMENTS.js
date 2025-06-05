@@ -22,6 +22,7 @@ const toggleExplanationBtn = document.getElementById("toggleExplanationBtn");
 const explanationBoxContainer = document.getElementById(
   "explanationBoxContainer"
 );
+const explanationLoader = document.getElementById("explanationLoader");
 
 // =====================
 // CONFIGURABLE API ENDPOINT
@@ -114,12 +115,30 @@ function getAnimatedStatusIcon(type) {
       </svg>`;
     case "loading":
       // ANIMATED SPINNER
+      return `<svg width="40" height="40" viewBox="0 0 40 40" style="vertical-align:middle;">
+      <circle cx="18" cy="18" r="10" stroke="#0ff" stroke-width="3" fill="none">
+        <animateTransform attributeName="transform" type="rotate"
+          from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <rect x="27" y="27" width="8" height="3" rx="1.5" fill="#0ff" transform="rotate(45 27 27)">
+        <animateTransform attributeName="transform" type="rotate"
+          from="45 27 27" to="405 27 27" dur="1s" repeatCount="indefinite"/>
+      </rect>
+    </svg>`;
+    case "feedload":
+      // ANIMATED SPINNER
       return `<svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align:middle;margin-right:8px;">
         <circle cx="18" cy="18" r="16" stroke="#0ff" stroke-width="4" fill="none" opacity="0.2"/>
         <circle cx="18" cy="18" r="16" stroke="#0ff" stroke-width="4" fill="none" stroke-dasharray="80" stroke-dashoffset="60">
           <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
         </circle>
       </svg>`;
+    case "green":
+      // ANIMATED SPINNER
+      return `<svg class="confidence-bar-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="#0ff" opacity="0.3"/><circle cx="16" cy="16" r="6" fill="#00ff90"><animate attributeName="r" values="6;8;6" dur="1.2s" repeatCount="indefinite"/></circle></svg>`;
+    case "warning":
+      // ANIMATED SPINNER
+      return `<svg class="confidence-bar-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="#ff4d4d" opacity="0.3"/><path d="M16 10v6M16 22h0" stroke="#ffb347" stroke-width="3" stroke-linecap="round"><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/></path></svg>`;
     default:
       return "";
   }

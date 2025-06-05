@@ -72,7 +72,7 @@ submitFeedback.addEventListener("click", async () => {
   const improve = document.getElementById("feedbackImprove").value.trim();
 
   if (!rating || !like || !improve) {
-    showToast("PLEASE COMPLETE ALL FEEDBACK FIELDS.", "loading");
+    showToast("PLEASE COMPLETE ALL FEEDBACK FIELDS.", "feedload");
     return;
   }
 

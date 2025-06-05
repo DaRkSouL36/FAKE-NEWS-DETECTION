@@ -76,7 +76,7 @@
         <button
           class="nav-toggle"
           id="navToggle"
-          aria-label="Open navigation menu"
+          aria-label="OPEN NAVIGATION MENU"
           aria-controls="navControls"
           aria-expanded="false"
         >
@@ -86,7 +86,7 @@
 
         <div class="nav-controls" id="navControls">
           <!-- NAVIGATION CONTROLS: MODEL SELECTOR AND THEME TOGGLE -->
-          <button id="themeToggle" aria-label="Toggle Theme">
+          <button id="themeToggle" aria-label="TOGGLE THEME">
             <i class="fas fa-moon"></i>
           </button>
           <!-- BUTTON TO TOGGLE BETWEEN DARK AND LIGHT THEMES -->
@@ -102,7 +102,7 @@
 
         <div class="model-select-row">
           <!-- MODEL SELECTION DROPDOWN ROW, PLACED ABOVE HEADLINE AND TEXTAREA -->
-          <select id="modelSelect" title="Choose Model">
+          <select id="modelSelect">
             <!-- DROPDOWN TO SELECT ML MODEL -->
             <option value="LOGISTIC">LOGISTIC</option>
             <option value="LSTM">LSTM</option>
@@ -122,22 +122,21 @@
             <textarea
               placeholder="PASTE YOUR NEWS ARTICLE HERE..."
               id="newsInput"
-              aria-label="News article input"
+              aria-label="NEWS ARTICLE INPUT"
             ></textarea>
             <!-- TEXTAREA FOR USER TO INPUT/PASTE NEWS ARTICLE -->
             <button
               id="clearNewsBtn"
               class="clear-news-btn"
               type="button"
-              aria-label="Clear news input"
-              title="Clear"
+              aria-label="CLEAR NEWS INPUT"
             >
               <i class="fas fa-times"></i>
             </button>
             <button
               id="micBtn"
               class="mic-button"
-              aria-label="Voice Input"
+              aria-label="VOICE INPUT"
               type="button"
             >
               <span class="mic-circle">
@@ -174,7 +173,7 @@
               class="explanation-box"
               readonly
               rows="4"
-              aria-label="AI-generated factuality explanation"
+              aria-label="AI-GENERATED FACTUALITY EXPLANATION"
               placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
             ></textarea>
             <!-- OVERLAPPING COPY BUTTON AS AN ICON, CUTTING INTO THE EXPLANATION BOX -->
@@ -182,8 +181,7 @@
               id="copyExplanationBtn"
               class="copy-explanation-btn"
               type="button"
-              aria-label="Copy explanation"
-              title="Copy explanation"
+              aria-label="COPY EXPLANATION"
             >
               <i class="fas fa-copy"></i>
             </button>
@@ -192,8 +190,7 @@
               id="clearExplanationBtn"
               class="clear-explanation-btn"
               type="button"
-              aria-label="Clear explanation"
-              title="Clear explanation"
+              aria-label="CLEAR EXPLANATION"
             >
               <i class="fas fa-times"></i>
             </button>
@@ -203,8 +200,7 @@
             id="toggleExplanationBtn"
             class="toggle-explanation-btn"
             type="button"
-            aria-label="Expand/collapse explanation"
-            title="Expand/collapse explanation"
+            aria-label="EXPAND/COLLAPSE EXPLANATION"
           >
             <i class="fas fa-chevron-up"></i>
           </button>
@@ -221,8 +217,7 @@
     <button
       id="feedbackToggle"
       class="button feedback-button"
-      title="GIVE FEEDBACK"
-      aria-label="Open feedback form"
+      aria-label="OPEN FEEDBACK FORM"
     >
       <i class="fas fa-comment-dots"></i>
     </button>
@@ -258,14 +253,14 @@
         <textarea
           placeholder="WHAT DID YOU LIKE?"
           id="feedbackLike"
-          aria-label="What did you like?"
+          aria-label="WHAT DID YOU LIKE?"
         ></textarea>
         <!-- TEXTAREA FOR POSITIVE FEEDBACK -->
 
         <textarea
           placeholder="WHAT CAN BE IMPROVED?"
           id="feedbackImprove"
-          aria-label="What can be improved?"
+          aria-label="WHAT CAN BE IMPROVED?"
         ></textarea>
         <!-- TEXTAREA FOR SUGGESTIONS/IMPROVEMENTS -->
 
@@ -278,7 +273,15 @@
     </div>
 
     <!-- SCRIPT -->
-    <script src="SCRIPT.js"></script>
-    <!-- LINKS THE MAIN JAVASCRIPT FILE FOR ALL INTERACTIVITY -->
+    <script src="JS/CORE_ELEMENTS.js"></script>
+    <script src="JS/EXPLANATION_AREA.js"></script>
+    <script src="JS/THEME_MANAGER.js"></script>
+    <script src="JS/VOICE_INPUT.js"></script>
+    <script src="JS/ANALYSIS_HANDLER.js"></script>
+    <script src="JS/FEEDBACK_MODAL.js"></script>
+    <script src="JS/MOBILE_NAV.js"></script>
+    <script src="JS/MAIN_ACTIONS.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- LINKS THE JAVASCRIPT FILE FOR ALL INTERACTIVITY -->
   </body>
 </html>

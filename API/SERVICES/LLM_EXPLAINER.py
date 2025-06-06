@@ -41,16 +41,14 @@ class LLMExplainer:
 
             # BUILDS A NATURAL-LANGUAGE PROMPT TO INSTRUCT THE LLM TO EXPLAIN ITS CLASSIFICATION.
             prompt_template = (
-                f"ANALYZE THE FOLLOWING NEWS ARTICLE AND EXPLAIN IN EXACTLY 2 TO 4 SENTENCES WHY IT IS CLASSIFIED AS {prediction.upper()}."
-                f" YOUR EXPLANATION MUST BE CLEAR, CONCISE, AND GROUNDED IN THE CONTENT OF THE ARTICLE. FOCUS SPECIFICALLY ON:\n"
-                f"- SOURCE CREDIBILITY\n"
-                f"- EVIDENCE QUALITY\n"
-                f"- LOGICAL CONSISTENCY\n"
-                f"DO NOT EXCEED 4 SENTENCES.\n\n"
-                f"ARTICLE:\n{truncated_text}\n\n"
-                f"EXPLANATION:\n"
+                f"You are an expert fact-checker. Read the following news article and explain, in 2 to 4 sentences, exactly why it is classified as {prediction.upper()}. "
+                f"Base your explanation only on the article content, focusing on source credibility, evidence quality, and logical consistency. "
+                f"When possible, cite specific facts or statements from the article to support your explanation. "
+                f"Do not repeat the article text. Do not include any questions, disclaimers, or instructions. "
+                f"Only provide the explanation. "
+                f"\n\nARTICLE:\n{truncated_text}\n\nEXPLANATION:"
             )
-
+            
             # GENERATES THE EXPLANATION USING THE LLM WITH STRICT OUTPUT LIMITS AND RELIABLE TERMINATION.
             generation_result = self.generator(
                 prompt_template,              # PROVIDES THE STRUCTURED PROMPT TO THE LLM

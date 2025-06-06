@@ -1,0 +1,27 @@
+/* ===========================
+   RESULT CONTAINER FOR PREDICTION AND CONFIDENCE
+   =========================== */
+#resultContainer {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease, opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+/* SHOWS RESULT WITH FADE-IN ANIMATION WHEN NOT HIDDEN */
+#resultContainer:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInResult 0.5s;
+}
+
+/* STRONG TAG IN RESULT CONTAINER: SMOOTH COLOR TRANSITION */
+#resultContainer strong {
+  transition: color 0.3s ease;
+}

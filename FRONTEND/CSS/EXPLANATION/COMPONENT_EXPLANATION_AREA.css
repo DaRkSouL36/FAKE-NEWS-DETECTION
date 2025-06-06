@@ -1,0 +1,89 @@
+/* ===========================
+   EXPLANATION AREA OUTER CONTAINER
+   =========================== */
+.explanation-area {
+  max-width: 700px;
+  margin: 24px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ===========================
+   EXPLANATION BOX CONTAINER
+   =========================== */
+.explanation-box-container {
+  position: relative;
+  background: #111;
+  border-radius: 18px;
+  padding: 30px 24px 30px 24px;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #0ff2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s,
+    opacity 0.25s;
+  opacity: 1;
+}
+
+/* ===========================
+   EXPLANATION LABEL
+   =========================== */
+.explanation-label {
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* ===========================
+   EXPLANATION BOX (READONLY TEXTAREA)
+   =========================== */
+.explanation-box {
+  width: 100%;
+  background: transparent;
+  color: #0ff;
+  border: none;
+  resize: vertical;
+  font-size: 1.1rem;
+  min-height: 90px;
+  outline: none;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 1px;
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  font-style: italic;
+  transition: background 0.3s, color 0.3s, border 0.3s, box-shadow 0.6s;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   FILLED STATE FOR EXPLANATION BOX
+   =========================== */
+.explanation-box.filled {
+  box-shadow: 0 0 20px #0ff8;
+}
+
+/* ===========================
+   EXPLANATION LOADER
+   =========================== */
+.explanation-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  font-size: 1.1rem;
+  color: #0ff;
+  background: transparent;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  box-shadow: 0 0 20px #0ff8;
+}
+.explanation-loader.hidden {
+  display: none;
+}
+.explanation-loader .loader {
+  margin-right: 12px;
+}

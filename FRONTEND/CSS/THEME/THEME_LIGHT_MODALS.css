@@ -1,0 +1,17 @@
+/* ===========================
+   LIGHT MODE: MODAL CONTENT AND TEXTAREA
+   =========================== */
+
+/* LIGHT MODE MODAL CONTENT APPEARANCE */
+body.light-mode .modal-content {
+  background: #fff;
+  color: #1a2533;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #0cf1;
+}
+
+/* LIGHT MODE MODAL TEXTAREA */
+body.light-mode .modal-content textarea {
+  background: rgba(0, 0, 0, 0.05);
+  color: #191919;
+}

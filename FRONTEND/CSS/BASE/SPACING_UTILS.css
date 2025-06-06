@@ -1,0 +1,45 @@
+/* ===========================
+   STRUCTURED VERTICAL SPACING BETWEEN MAIN COMPONENTS
+   =========================== */
+
+/* VERTICAL SPACING BELOW EACH MAJOR UI BLOCK */
+.model-select-row,
+.textarea-container,
+#resultContainer,
+.explanation-area,
+.action-buttons {
+  margin-bottom: 32px;
+}
+
+/* TOP MARGIN FOR THE FIRST MAIN CONTAINER */
+.textarea-container {
+  margin-top: 24px;
+}
+
+/* RESPONSIVE SPACING FOR TABLETS */
+@media (max-width: 768px) {
+  .model-select-row,
+  .textarea-container,
+  #resultContainer,
+  .explanation-area,
+  .action-buttons {
+    margin-bottom: 18px;
+  }
+  .textarea-container {
+    margin-top: 14px;
+  }
+}
+
+/* RESPONSIVE SPACING FOR SMALL PHONES */
+@media (max-width: 480px) {
+  .model-select-row,
+  .textarea-container,
+  #resultContainer,
+  .explanation-area,
+  .action-buttons {
+    margin-bottom: 10px;
+  }
+  .textarea-container {
+    margin-top: 8px;
+  }
+}

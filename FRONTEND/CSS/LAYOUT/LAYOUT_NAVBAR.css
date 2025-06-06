@@ -1,0 +1,81 @@
+/* ===========================
+   NAVBAR LAYOUT AND ELEMENTS
+   =========================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* LOGO STYLES IN NAVBAR */
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* NAV TOGGLE BUTTON FOR MOBILE MENU */
+.nav-toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.nav-toggle:focus {
+  outline: 2px solid #0ff;
+  outline-offset: 2px;
+}
+
+/* NAV CONTROLS: THEME TOGGLE AND OTHER CONTROLS */
+.nav-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+/* THEME TOGGLE BUTTON IN NAVBAR */
+#themeToggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+/* RESPONSIVE NAVBAR FOR MOBILE */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-controls {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    padding: 15px 20px;
+    border-radius: 0 0 12px 12px;
+    z-index: 15;
+    box-shadow: 0 4px 12px #0008;
+  }
+  .navbar.open .nav-controls {
+    display: flex;
+    animation: fadeInDown 0.3s;
+  }
+}

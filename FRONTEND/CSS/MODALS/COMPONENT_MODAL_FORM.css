@@ -1,0 +1,40 @@
+/* ===========================
+   MODAL CONTENT CONTAINER STYLES
+   =========================== */
+.modal-content {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 8px 32px #000a;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* MODAL HEADER */
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+/* MODAL TEXTAREA STYLES */
+.modal-content textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  border: none;
+  resize: vertical;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* RANGE INPUT IN MODAL */
+.modal-content input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}

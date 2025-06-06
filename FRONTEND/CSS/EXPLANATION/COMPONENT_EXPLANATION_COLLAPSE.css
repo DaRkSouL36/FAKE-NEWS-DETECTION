@@ -1,0 +1,20 @@
+/* ===========================
+   COLLAPSED STATE FOR EXPLANATION BOX CONTAINER
+   =========================== */
+.explanation-box-container.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+}
+
+/* ANIMATE LABEL, BOX, AND BUTTONS OUT WHEN COLLAPSED */
+.explanation-box-container.collapsed .explanation-label,
+.explanation-box-container.collapsed .explanation-box,
+.explanation-box-container.collapsed .copy-explanation-btn,
+.explanation-box-container.collapsed .clear-explanation-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}

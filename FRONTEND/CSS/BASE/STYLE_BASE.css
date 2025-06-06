@@ -1,0 +1,52 @@
+/* ===========================
+   RESET & BASE STYLES
+   =========================== */
+
+/* RESET DEFAULT MARGINS, PADDINGS, AND SETS BORDER-BOX FOR CONSISTENT SIZING */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* SET BASE FONT, COLORS, AND BACKGROUND FOR THE WHOLE PAGE */
+html,
+body {
+  font-family: "Orbitron", sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+  color: #ffffff;
+  background-color: #000;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* BACKGROUND VIDEO STYLES FOR FULL-SCREEN EFFECT AND LEGIBILITY */
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 0;
+  object-fit: cover;
+  filter: brightness(0.3);
+  background: #222;
+}
+
+/* OVERLAY LAYER POSITIONED ABOVE THE BACKGROUND VIDEO */
+.overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+  transition: color 0.4s;
+}
+
+/* MODEL SELECT ROW STYLES FOR LAYOUT */
+.model-select-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 auto 18px auto;
+  max-width: 700px;
+  width: 100%;
+}

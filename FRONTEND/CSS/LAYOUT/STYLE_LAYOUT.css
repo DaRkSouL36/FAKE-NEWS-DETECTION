@@ -1,0 +1,31 @@
+/* ===========================
+   SCROLL INDICATOR: BOUNCING ARROW FOR USER HINT
+   =========================== */
+.scroll-indicator {
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+  margin-top: 50px;
+  color: #0ff;
+}
+
+/* ===========================
+   HIDDEN CLASS: UTILITY TO HIDE ELEMENTS
+   =========================== */
+.hidden {
+  display: none !important;
+}
+
+/* ===========================
+   CUSTOM SCROLLBAR FOR MODERN LOOK
+   =========================== */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #191919;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #0ff, #f0f 70%);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #0cf, #0ff 70%);
+}

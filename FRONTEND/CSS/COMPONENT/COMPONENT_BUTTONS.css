@@ -1,0 +1,35 @@
+/* ===========================
+   GENERAL BUTTON STYLES
+   =========================== */
+
+button,
+.button,
+.feedback-button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #00ffe0, #ff00cc);
+  box-shadow: 0 0 15px #0ff, 0 0 30px #f0f;
+  color: black;
+  font-weight: bold;
+  transition: transform 0.2s, background 0.4s, color 0.4s, box-shadow 0.3s;
+}
+
+button:hover,
+.button:hover,
+.feedback-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #0ff, 0 0 40px #f0f;
+}
+
+button:focus,
+.button:focus,
+.feedback-button:focus {
+  outline: 2px solid #0ff;
+  outline-offset: 2px;
+  background: linear-gradient(45deg, #0ff, #0cf);
+  color: #fff;
+}

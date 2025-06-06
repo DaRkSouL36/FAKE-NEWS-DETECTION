@@ -1,0 +1,99 @@
+/* ===========================
+   COPY EXPLANATION BUTTON
+   =========================== */
+.copy-explanation-btn {
+  position: absolute;
+  left: -32px;
+  bottom: -32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #0ff;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #f0f;
+  color: #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  z-index: 10;
+}
+.copy-explanation-btn:hover,
+.copy-explanation-btn:focus {
+  background: #0ff;
+  color: #111;
+  box-shadow: 0 0 24px #0ff, 0 0 36px #f0f;
+  outline: none;
+}
+.copy-explanation-btn i {
+  font-size: 1.5rem;
+}
+
+/* ===========================
+   CLEAR EXPLANATION BUTTON
+   =========================== */
+.clear-explanation-btn {
+  position: absolute;
+  right: -32px;
+  bottom: -32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #0ff;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #f0f;
+  color: #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  z-index: 10;
+}
+.clear-explanation-btn:hover,
+.clear-explanation-btn:focus {
+  background: #0ff;
+  color: #111;
+  box-shadow: 0 0 24px #0ff, 0 0 36px #f0f;
+  outline: none;
+}
+.clear-explanation-btn i {
+  font-size: 1.5rem;
+}
+
+/* ===========================
+   TOGGLE (EXPAND/COLLAPSE) BUTTON
+   =========================== */
+.toggle-explanation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px auto 0 auto;
+  width: 72px;
+  height: 36px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #00ffe0 0%, #0cf 100%);
+  color: #111;
+  font-size: 1.8rem;
+  font-family: inherit;
+  font-weight: bold;
+  box-shadow: 0 0 18px #0ff, 0 0 32px #0ff7;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  outline: none;
+}
+.toggle-explanation-btn:hover,
+.toggle-explanation-btn:focus {
+  background: linear-gradient(90deg, #0cf 0%, #00ffe0 100%);
+  color: #fff;
+  box-shadow: 0 0 32px #0ff, 0 0 48px #0ff7;
+}
+.toggle-explanation-btn i {
+  font-size: 1.2em;
+  pointer-events: none;
+}

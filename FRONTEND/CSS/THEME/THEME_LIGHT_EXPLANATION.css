@@ -1,0 +1,51 @@
+/* ===========================
+   LIGHT THEME OVERRIDES FOR EXPLANATION AREA AND BUTTONS
+   =========================== */
+
+/* EXPLANATION BOX CONTAINER IN LIGHT MODE */
+body.light-mode .explanation-box-container {
+  background: #f8fafd;
+  box-shadow: 0 0 18px #0cf, 0 0 32px #0cf2;
+}
+
+/* EXPLANATION BOX TEXT COLOR IN LIGHT MODE */
+body.light-mode .explanation-box {
+  color: #007b8a;
+}
+
+/* COPY BUTTON IN LIGHT MODE */
+body.light-mode .copy-explanation-btn {
+  background: #f8fafd;
+  border-color: #0cf;
+  color: #0cf;
+}
+body.light-mode .copy-explanation-btn:hover,
+body.light-mode .copy-explanation-btn:focus {
+  background: #0cf;
+  color: #fff;
+}
+
+/* CLEAR BUTTON IN LIGHT MODE */
+body.light-mode .clear-explanation-btn {
+  background: #f8fafd;
+  border-color: #0cf;
+  color: #0cf;
+}
+body.light-mode .clear-explanation-btn:hover,
+body.light-mode .clear-explanation-btn:focus {
+  background: #0cf;
+  color: #fff;
+}
+
+/* TOGGLE BUTTON IN LIGHT MODE */
+body.light-mode .toggle-explanation-btn {
+  background: linear-gradient(90deg, #7ee8fa 0%, #0cf 100%);
+  color: #191919;
+  box-shadow: 0 0 12px #0cf2;
+}
+body.light-mode .toggle-explanation-btn:hover,
+body.light-mode .toggle-explanation-btn:focus {
+  background: linear-gradient(90deg, #0cf 0%, #7ee8fa 100%);
+  color: #fff;
+  box-shadow: 0 0 24px #0cf6;
+}

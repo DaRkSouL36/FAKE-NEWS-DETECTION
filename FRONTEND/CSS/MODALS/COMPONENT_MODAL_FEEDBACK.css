@@ -1,0 +1,33 @@
+/* ===========================
+   FEEDBACK MODAL OVERLAY STYLES
+   =========================== */
+#feedbackModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* SHOWS MODAL WHEN NOT HIDDEN, WITH FADE-IN ANIMATION */
+#feedbackModal:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeInModal 0.4s;
+}
+
+/* GLASSMORPHISM EFFECT FOR MODAL WINDOWS */
+#feedbackModal .modal-content {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}

@@ -87,6 +87,16 @@ analyzeBtn.addEventListener("click", async () => {
       explanationBox.classList.add("filled");
       explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
       explanationBox.focus();
+
+      // explanationLoader.innerHTML = `<div style="margin-top:10px;letter-spacing:1px;"> <div class="loader" aria-label="GENERATING"></div></div>`;
+      explanationLoader.classList.remove("hidden");
+
+      setTimeout(() => {
+        explanationLoader.classList.add("explanation-success-bg");
+        explanationLoader.innerHTML = `<span class="explanation-success">${getAnimatedStatusIcon(
+          "success"
+        )}</span>`;
+      }, 100);
     } else {
       // HANDLES INVALID API RESPONSE FORMAT
       resultEl.innerHTML = `

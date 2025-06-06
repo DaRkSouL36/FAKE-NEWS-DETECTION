@@ -35,20 +35,60 @@
 
     <!-- STYLES: IMPORT ALL CSS MODULES IN ORDER -->
 
-    <!-- BASE STYLES: RESET, VARIABLES, TYPOGRAPHY, ETC. -->
-    <link rel="stylesheet" href="CSS/STYLE_BASE.css" />
+    <!-- 1. BASE STYLES: RESET, TYPOGRAPHY, SPACING, HERO -->
+    <link rel="stylesheet" href="CSS/BASE/STYLE_BASE.css" />
+    <link rel="stylesheet" href="CSS/BASE/SPACING_UTILS.css" />
+    <link rel="stylesheet" href="CSS/BASE/HERO.css" />
 
-    <!-- LAYOUT STYLES: NAVBAR, HERO, OVERLAY, RESPONSIVE, ETC. -->
-    <link rel="stylesheet" href="CSS/STYLE_LAYOUT.css" />
+    <!-- 2. LAYOUT STYLES: NAVBAR, PAGE STRUCTURE, RESPONSIVE -->
+    <link rel="stylesheet" href="CSS/LAYOUT/STYLE_LAYOUT.css" />
+    <link rel="stylesheet" href="CSS/LAYOUT/LAYOUT_NAVBAR.css" />
+    <link rel="stylesheet" href="CSS/LAYOUT/LAYOUT_RESPONSIVE.css" />
 
-    <!-- COMPONENT STYLES: BUTTONS, TEXTAREA, MIC, ETC. -->
-    <link rel="stylesheet" href="CSS/STYLE_COMPONENTS.css" />
+    <!-- 3. COMPONENT STYLES: BUTTONS, TEXTAREA, CONTROLS -->
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_BUTTONS.css" />
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_CONFIDENCE_BAR.css" />
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_FEEDBACK_BUTTON.css" />
+    <link
+      rel="stylesheet"
+      href="CSS/COMPONENT/COMPONENT_LOADER_ACCESSIBILITY.css"
+    />
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_MIC_BUTTON.css" />
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_MODEL_SELECT.css" />
+    <link rel="stylesheet" href="CSS/COMPONENT/COMPONENT_TEXTAREA.css" />
 
-    <!-- MODAL STYLES: FEEDBACK MODAL, MODAL CONTENT, MODAL ANIMATIONS -->
-    <link rel="stylesheet" href="CSS/STYLE_MODALS.css" />
+    <!-- 4. EXPLANATION/RESULT STYLES -->
+    <link
+      rel="stylesheet"
+      href="CSS/EXPLANATION/COMPONENT_EXPLANATION_AREA.css"
+    />
+    <link
+      rel="stylesheet"
+      href="CSS/EXPLANATION/COMPONENT_EXPLANATION_BUTTONS.css"
+    />
+    <link
+      rel="stylesheet"
+      href="CSS/EXPLANATION/COMPONENT_EXPLANATION_COLLAPSE.css"
+    />
+    <link
+      rel="stylesheet"
+      href="CSS/EXPLANATION/COMPONENT_RESULT_CONTAINER.css"
+    />
 
-    <!-- EXPLANATION & RESULT STYLES: EXPLANATION AREA, COPY BUTTON, RESULT CONTAINER -->
-    <link rel="stylesheet" href="CSS/STYLE_EXPLANATION.css" />
+    <!-- 5. MODAL STYLES -->
+    <link rel="stylesheet" href="CSS/MODALS/COMPONENT_MODAL_FEEDBACK.css" />
+    <link rel="stylesheet" href="CSS/MODALS/COMPONENT_MODAL_FORM.css" />
+    <link rel="stylesheet" href="CSS/MODALS/COMPONENT_MODAL_BUTTONS.css" />
+
+    <!-- 6. ANIMATIONS (KEYFRAMES) -->
+    <link rel="stylesheet" href="CSS/THEME/ANIMATION.css" />
+
+    <!-- 7. THEME STYLES (ALWAYS LAST TO OVERRIDE) -->
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_BASE.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_LAYOUT.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_COMPONENTS.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_EXPLANATION.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_MODALS.css" />
   </head>
 
   <body>

@@ -75,3 +75,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* GRADIENT ANIMATION FOR EXPLANATION LOADER */
+@keyframes fade-in-check {
+  to {
+    opacity: 1;
+  }
+}
+
+/* FADE-IN ANIMATION FOR EXPLANATION LOADER */
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.explanation-success-bg {
+  background: linear-gradient(90deg, #555555, #333333, #555555);
+  background-size: 200% 200%;
+  animation: gradient-move 2s linear infinite;
+}

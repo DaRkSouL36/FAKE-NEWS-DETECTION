@@ -11,7 +11,7 @@ if ("webkitSpeechRecognition" in window) {
 
   recognition.onstart = () => {
     micBtn.innerHTML = `<i class="fas fa-wave-square"></i>`;
-    resultEl.innerHTML =
+    resultContainer.innerHTML =
       getAnimatedStatusIcon("on") +
       `MICROPHONE ACTIVATED! PLEASE SPEAK CLEARLY AND CHECK YOUR MUTE SETTINGS IF YOU'RE NOT HEARD!`;
     showResult();
@@ -25,7 +25,7 @@ if ("webkitSpeechRecognition" in window) {
 
   recognition.onerror = (event) => {
     console.error("SPEECH RECOGNITION ERROR:", event.error);
-    resultEl.innerHTML =
+    resultContainer.innerHTML =
       getAnimatedStatusIcon("wave") +
       '<span class="error-text">SPEECH RECOGNITION ERROR. PLEASE TRY AGAIN.</span>';
     showResult();
@@ -35,7 +35,7 @@ if ("webkitSpeechRecognition" in window) {
   recognition.onresult = (event) => {
     const transcript = event.results[0][0].transcript;
     newsInput.value = transcript;
-    resultEl.innerHTML =
+    resultContainer.innerHTML =
       getAnimatedStatusIcon("mic") +
       `INPUT CAPTURED: "<span style="text-transform:uppercase;">${transcript}</span>"`;
     showResult();

@@ -1,19 +1,24 @@
 // =====================
 // GLOBAL ELEMENT HOOKS
 // =====================
-// SELECTS AND STORES REFERENCES TO ALL MAJOR DOM ELEMENTS FOR INTERACTION
 const newsInput = document.getElementById("newsInput");
-const resultEl = document.getElementById("resultContainer");
+const resultContainer = document.getElementById("resultContainer");
+const resultText = document.getElementById("resultText");
+const confidenceBarWrapper = document.getElementById("confidenceBarWrapper");
+
 const micBtn = document.getElementById("micBtn");
 const analyzeBtn = document.getElementById("analyzeBtn");
 const modelSelect = document.getElementById("modelSelect");
 const themeToggle = document.getElementById("themeToggle");
+
 const feedbackToggle = document.getElementById("feedbackToggle");
 const feedbackModal = document.getElementById("feedbackModal");
 const closeModal = document.getElementById("closeModal");
 const submitFeedback = document.getElementById("submitFeedback");
+
 const navToggle = document.getElementById("navToggle");
 const navControls = document.getElementById("navControls");
+
 const explanationBox = document.getElementById("explanationBox");
 const copyExplanationBtn = document.getElementById("copyExplanationBtn");
 const clearNewsBtn = document.getElementById("clearNewsBtn");
@@ -23,6 +28,9 @@ const explanationBoxContainer = document.getElementById(
   "explanationBoxContainer"
 );
 const explanationLoader = document.getElementById("explanationLoader");
+const ratingInput = document.getElementById("rating");
+const feedbackLikeInput = document.getElementById("feedbackLike");
+const feedbackImproveInput = document.getElementById("feedbackImprove");
 
 // =====================
 // CONFIGURABLE API ENDPOINT
@@ -133,12 +141,6 @@ function getAnimatedStatusIcon(type) {
           <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
         </circle>
       </svg>`;
-    case "green":
-      // ANIMATED SPINNER
-      return `<svg class="confidence-bar-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="#0ff" opacity="0.3"/><circle cx="16" cy="16" r="6" fill="#00ff90"><animate attributeName="r" values="6;8;6" dur="1.2s" repeatCount="indefinite"/></circle></svg>`;
-    case "warning":
-      // ANIMATED SPINNER
-      return `<svg class="confidence-bar-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="#ff4d4d" opacity="0.3"/><path d="M16 10v6M16 22h0" stroke="#ffb347" stroke-width="3" stroke-linecap="round"><animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/></path></svg>`;
     default:
       return "";
   }
@@ -149,15 +151,15 @@ function getAnimatedStatusIcon(type) {
 // =====================
 // UTILITY FUNCTION TO SHOW RESULT CONTAINER WITH ARIA ATTRIBUTES
 function showResult() {
-  resultEl.classList.remove("hidden");
-  resultEl.setAttribute("aria-live", "polite");
-  resultEl.setAttribute("aria-atomic", "true");
+  resultContainer.classList.remove("hidden");
+  resultContainer.setAttribute("aria-live", "polite");
+  resultContainer.setAttribute("aria-atomic", "true");
 }
 
 // UTILITY FUNCTION TO ANIMATE RESULT CONTAINER (FADE IN)
 function animateResult() {
-  resultEl.style.animation = "fadeInResult 0.5s";
+  resultContainer.style.animation = "fadeInResult 0.5s";
   setTimeout(() => {
-    resultEl.style.animation = "";
+    resultContainer.style.animation = "";
   }, 500);
 }

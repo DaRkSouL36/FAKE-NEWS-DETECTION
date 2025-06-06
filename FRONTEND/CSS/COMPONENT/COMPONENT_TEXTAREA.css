@@ -42,6 +42,18 @@
 }
 
 /* ===========================
+   JUSTIFY TEXT IN NEWS TEXTAREA
+   =========================== */
+#newsInput,
+.textarea-box textarea {
+  text-align: justify;
+  text-justify: inter-word;
+  white-space: pre-line;
+  padding: 5px 18px;
+  box-sizing: border-box;
+}
+
+/* ===========================
    PLACEHOLDER TEXT STYLES FOR TEXTAREA
    =========================== */
 

@@ -10,7 +10,7 @@ function openModal() {
   feedbackModal.setAttribute("role", "dialog");
   lastActiveElement = document.activeElement;
   setTimeout(() => {
-    document.getElementById("rating").focus();
+    if (ratingInput) ratingInput.focus();
   }, 100);
   trapFocus(feedbackModal);
 }
@@ -67,9 +67,9 @@ function trapFocus(modal) {
 
 // HANDLES FEEDBACK FORM SUBMISSION
 submitFeedback.addEventListener("click", async () => {
-  const rating = document.getElementById("rating").value.trim();
-  const like = document.getElementById("feedbackLike").value.trim();
-  const improve = document.getElementById("feedbackImprove").value.trim();
+  const rating = ratingInput.value.trim();
+  const like = feedbackLikeInput.value.trim();
+  const improve = feedbackImproveInput.value.trim();
 
   if (!rating || !like || !improve) {
     showToast("PLEASE COMPLETE ALL FEEDBACK FIELDS.", "feedload");
@@ -79,6 +79,10 @@ submitFeedback.addEventListener("click", async () => {
   try {
     await new Promise((res) => setTimeout(res, 500)); // SIMULATED DELAY
     showToast("THANK YOU FOR YOUR FEEDBACK!", "success");
+    // CLEAR THE FEEDBACK FORM FIELDS
+    ratingInput.value = "";
+    feedbackLikeInput.value = "";
+    feedbackImproveInput.value = "";
     closeModalFunc();
   } catch (err) {
     showToast("ERROR SUBMITTING FEEDBACK.", "error");

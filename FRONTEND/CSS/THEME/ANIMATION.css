@@ -2,7 +2,7 @@
    MODAL AND GENERAL UI ANIMATIONS
    =========================== */
 
-/* FADE-IN ANIMATION FOR MODAL WINDOWS */
+/* FADE-IN ANIMATION FOR MODAL WINDOWS (SMOOTHLY INCREASES OPACITY) */
 @keyframes fadeInModal {
   from {
     opacity: 0;
@@ -12,7 +12,7 @@
   }
 }
 
-/* FADE-IN UP ANIMATION FOR ELEMENTS APPEARING FROM BELOW */
+/* FADE-IN UP ANIMATION FOR ELEMENTS APPEARING FROM BELOW (RISES AND FADES IN) */
 @keyframes fadeInUp {
   from {
     transform: translateY(20px);
@@ -24,7 +24,7 @@
   }
 }
 
-/* FADE-IN DOWN ANIMATION FOR ELEMENTS DROPPING FROM ABOVE */
+/* FADE-IN DOWN ANIMATION FOR ELEMENTS DROPPING FROM ABOVE (DROPS AND FADES IN) */
 @keyframes fadeInDown {
   from {
     transform: translateY(-20px);
@@ -36,7 +36,7 @@
   }
 }
 
-/* BOUNCE ANIMATION FOR SCROLL INDICATOR OR ICONS */
+/* BOUNCE ANIMATION FOR SCROLL INDICATOR OR ICONS (JUMPS UP AND DOWN) */
 @keyframes bounce {
   0%,
   100% {
@@ -47,7 +47,7 @@
   }
 }
 
-/* PULSE-GLOW ANIMATION FOR CONFIDENCE BAR ICONS */
+/* PULSE-GLOW ANIMATION FOR CONFIDENCE BAR ICONS (GLOWS IN AND OUT) */
 @keyframes pulse-glow {
   0% {
     filter: drop-shadow(0 0 6px #0ff8);
@@ -57,7 +57,7 @@
   }
 }
 
-/* FADE-IN ANIMATION FOR RESULT CONTAINER */
+/* FADE-IN ANIMATION FOR RESULT CONTAINER (SLIDES UP AND FADES IN) */
 @keyframes fadeInResult {
   from {
     opacity: 0;
@@ -69,21 +69,21 @@
   }
 }
 
-/* SPIN ANIMATION FOR LOADER/SPINNER */
+/* SPIN ANIMATION FOR LOADER/SPINNER (360 DEGREE ROTATION) */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* GRADIENT ANIMATION FOR EXPLANATION LOADER */
+/* FADE-IN ANIMATION FOR CHECKMARK IN EXPLANATION LOADER (FADES IN TO FULL OPACITY) */
 @keyframes fade-in-check {
   to {
     opacity: 1;
   }
 }
 
-/* FADE-IN ANIMATION FOR EXPLANATION LOADER */
+/* GRADIENT ANIMATION FOR EXPLANATION LOADER (MOVES GRADIENT FROM LEFT TO RIGHT) */
 @keyframes gradient-move {
   0% {
     background-position: 0% 50%;
@@ -92,8 +92,13 @@
     background-position: 100% 50%;
   }
 }
-.explanation-success-bg {
-  background: linear-gradient(90deg, #555555, #333333, #555555);
-  background-size: 200% 200%;
-  animation: gradient-move 2s linear infinite;
+
+/* BAR GLINT ANIMATION FOR MOVING LIGHT EFFECT ACROSS PROGRESS BARS */
+@keyframes bar-glint-wrapper {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
 }

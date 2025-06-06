@@ -8,10 +8,10 @@
   height: 16px;
   background: rgba(30, 30, 40, 0.88);
   border-radius: 8px;
-  overflow: visible;
   box-shadow: 0 2px 12px #0ff6, 0 0 28px #0ff2;
   position: relative;
   transition: background 0.3s;
+  overflow: hidden;
 }
 
 /* ===========================
@@ -21,7 +21,7 @@
 .confidence-bar {
   height: 100%;
   border-radius: 8px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
+  transition: width 1s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s;
   box-shadow: 0 0 16px #0ff8;
   position: relative;
 }
@@ -31,7 +31,7 @@
    =========================== */
 
 .confidence-bar.green {
-  background: linear-gradient(90deg, #00ff90 0%, #0ff 80%);
+  background: linear-gradient(90deg, #00ff90 0%, #0ff 80%, #2af598 100%);
   box-shadow: 0 0 16px #00ffc8cc, 0 0 32px #0ff4;
 }
 
@@ -40,8 +40,8 @@
    =========================== */
 
 .confidence-bar.red {
-  background: linear-gradient(90deg, #ff4d4d 0%, #ffb347 80%);
-  box-shadow: 0 0 16px #ff4d4dcc, 0 0 32px #ffb34755;
+  background: linear-gradient(90deg, #ff6666 0%, #cc0000 80%, #ff4d4d 100%);
+  box-shadow: 0 0 16px #cc0000cc, 0 0 32px #8b000055;
 }
 
 /* ===========================
@@ -56,4 +56,22 @@
   pointer-events: none;
   z-index: 2;
   animation: pulse-glow 1.3s infinite alternate;
+}
+
+.confidence-bar-wrapper::after {
+  content: "";
+  position: absolute;
+  left: -30%;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.7;
+  animation: bar-glint-wrapper 2s infinite linear;
+  pointer-events: none;
+  border-radius: 8px;
 }

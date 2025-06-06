@@ -1,11 +1,13 @@
 // =====================
 // AUTO-RESIZE EXPLANATION BOX ON INPUT OR VALUE CHANGE
 // =====================
+function resizeExplanationBox() {
+  explanationBox.style.height = "auto";
+  explanationBox.style.height = `${explanationBox.scrollHeight}px`;
+}
+
 if (explanationBox) {
-  explanationBox.addEventListener("input", () => {
-    explanationBox.style.height = "auto";
-    explanationBox.style.height = `${explanationBox.scrollHeight}px`;
-  });
+  explanationBox.addEventListener("input", resizeExplanationBox);
 }
 
 // =====================
@@ -58,7 +60,7 @@ if (toggleExplanationBtn && explanationBoxContainer) {
 if (copyExplanationBtn && explanationBox) {
   copyExplanationBtn.addEventListener("click", async () => {
     explanationBox.select();
-    explanationBox.setSelectionRange(0, 99999); 
+    explanationBox.setSelectionRange(0, 99999);
 
     try {
       await navigator.clipboard.writeText(explanationBox.value);

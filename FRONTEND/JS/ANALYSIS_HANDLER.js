@@ -82,13 +82,11 @@ analyzeBtn.addEventListener("click", async () => {
       // FILLS THE EXPLANATION BOX WITH THE API'S EXPLANATION OR A DEFAULT MESSAGE
       const explanation = result.EXPLANATION || result.explanation || "";
       explanationBox.value = explanation.trim() || "NO EXPLANATION AVAILABLE.";
-      explanationBox.dispatchEvent(new Event("input"));
       explanationBox.style.display = "block";
+      resizeExplanationBox();
       explanationBox.classList.add("filled");
       explanationBox.scrollIntoView({ behavior: "smooth", block: "center" });
       explanationBox.focus();
-
-      // explanationLoader.innerHTML = `<div style="margin-top:10px;letter-spacing:1px;"> <div class="loader" aria-label="GENERATING"></div></div>`;
       explanationLoader.classList.remove("hidden");
 
       setTimeout(() => {

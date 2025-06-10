@@ -2,6 +2,7 @@ from fastapi import FastAPI                         # IMPORTING THE MAIN FASTAPI
 from fastapi.middleware.cors import CORSMiddleware  # IMPORTING CORS MIDDLEWARE TO HANDLE CROSS-ORIGIN REQUESTS
 from ROUTER.PREDICTION_ROUTER import router as prediction_router  # IMPORTING THE PREDICTION ROUTER (HANDLES FAKE NEWS PREDICTION)
 from ROUTER.HEALTH_ROUTER import router as health_router          # IMPORTING THE HEALTH ROUTER (HANDLES API STATUS CHECK)
+from ROUTER.FEEDBACK_ROUTER import router as feedback_router      # IMPORTING THE FEEDBACK ROUTER (HANDLES USER FEEDBACK)
 from UTILS.LOGGER import logger                     # IMPORTING THE LOGGER FOR LOGGING INFORMATION AND ERRORS
 
 # CREATING FASTAPI APPLICATION INSTANCE WITH CUSTOM TITLE AND VERSION
@@ -22,6 +23,7 @@ app.add_middleware(
 # INCLUDE ROUTERS (THIS LINKS THE ROUTERS TO THE FASTAPI APP)
 app.include_router(prediction_router, prefix="/api")  # INCLUDES THE PREDICTION ROUTER UNDER "/api" PREFIX
 app.include_router(health_router, prefix="/api")      # INCLUDES THE HEALTH ROUTER UNDER "/api" PREFIX
+app.include_router(feedback_router, prefix="/api")    # INCLUDES THE FEEDBACK ROUTER UNDER "/api" PREFIX
 
 # LOGGING SUCCESSFUL INITIALIZATION OF THE API
 logger.info("API INITIALIZED WITH TITLE: 'FAKE NEWS DETECTION API' AND VERSION: '1.0'")

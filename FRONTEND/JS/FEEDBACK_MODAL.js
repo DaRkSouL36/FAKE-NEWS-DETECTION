@@ -77,8 +77,25 @@ submitFeedback.addEventListener("click", async () => {
   }
 
   try {
-    await new Promise((res) => setTimeout(res, 500)); // SIMULATED DELAY
+    // SEND FEEDBACK TO BACKEND API
+    const BACKEND_URL = "http://localhost:8000";
+
+    const res = await fetch(`${BACKEND_URL}/api/feedback/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rating: parseInt(rating, 10),
+        liked_feedback: like,
+        improvement_feedback: improve,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("SERVER ERROR!");
+    }
+
     showToast("THANK YOU FOR YOUR FEEDBACK!", "success");
+
     // CLEAR THE FEEDBACK FORM FIELDS
     ratingInput.value = "";
     feedbackLikeInput.value = "";

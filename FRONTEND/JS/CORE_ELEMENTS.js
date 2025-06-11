@@ -32,6 +32,10 @@ const ratingInput = document.getElementById("rating");
 const feedbackLikeInput = document.getElementById("feedbackLike");
 const feedbackImproveInput = document.getElementById("feedbackImprove");
 
+const speakExplanationBtn = document.getElementById("speakExplanationBtn");
+const voiceSpeedSlider = document.getElementById("voiceSpeedSlider");
+const voicePitchSlider = document.getElementById("voicePitchSlider");
+
 // =====================
 // CONFIGURABLE API ENDPOINT
 // =====================
@@ -140,6 +144,29 @@ function getAnimatedStatusIcon(type) {
         <circle cx="18" cy="18" r="16" stroke="#0ff" stroke-width="4" fill="none" stroke-dasharray="80" stroke-dashoffset="60">
           <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
         </circle>
+      </svg>`;
+    case "speaker-idle":
+      // GLOWING SPEAKER (IDLE)
+      return `<svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align:middle;">
+        <circle cx="18" cy="18" r="17" fill="#0ff" opacity="0.13"/>
+        <rect x="8" y="14" width="8" height="8" rx="3" fill="#0ff" />
+        <path d="M18 18 Q22 14 26 18 Q22 22 18 18" stroke="#0ff" stroke-width="2.5" fill="none" />
+      </svg>`;
+    case "speaker-speaking":
+      // ANIMATED SPEAKER (SOUND WAVES)
+      return `<svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align:middle;">
+        <circle cx="18" cy="18" r="17" fill="#0ff" opacity="0.22"/>
+        <rect x="8" y="14" width="8" height="8" rx="3" fill="#0ff" />
+        <path d="M18 18 Q22 14 26 18 Q22 22 18 18" stroke="#0ff" stroke-width="2.5" fill="none">
+          <animate attributeName="d" values="M18 18 Q22 14 26 18 Q22 22 18 18;M18 18 Q24 10 30 18 Q24 26 18 18;M18 18 Q22 14 26 18 Q22 22 18 18" dur="1s" repeatCount="indefinite"/>
+        </path>
+      </svg>`;
+    case "speaker-muted":
+      // MUTED SPEAKER (CROSSED)
+      return `<svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align:middle;">
+        <circle cx="18" cy="18" r="17" fill="#ff0066" opacity="0.13"/>
+        <rect x="8" y="14" width="8" height="8" rx="3" fill="#0ff" />
+        <path d="M22 14 L30 22 M30 14 L22 22" stroke="#ff0066" stroke-width="2.5" />
       </svg>`;
     default:
       return "";

@@ -74,6 +74,10 @@
       rel="stylesheet"
       href="CSS/EXPLANATION/COMPONENT_RESULT_CONTAINER.css"
     />
+    <link
+      rel="stylesheet"
+      href="CSS/EXPLANATION/COMPONENT_EXPLANATION_SPEECH_SYNTHESIS.css"
+    />
 
     <!-- 5. MODAL STYLES -->
     <link rel="stylesheet" href="CSS/MODALS/COMPONENT_MODAL_FEEDBACK.css" />
@@ -239,6 +243,49 @@
             >
               <i class="fas fa-times"></i>
             </button>
+            <!-- SPEECH SYNTHESIS (SPEAK/STOP) BUTTON FOR EXPLANATION AREA -->
+            <div class="explanation-speech-controls">
+              <!-- SPEAKER BUTTON SPANNING FULL WIDTH -->
+              <button
+                id="speakExplanationBtn"
+                class="speak-explanation-btn-wide"
+                type="button"
+                aria-label="SPEAK OR STOP EXPLANATION"
+              >
+                <i class="fas fa-volume-up"></i>
+              </button>
+              <!-- SLIDERS ROW -->
+              <div class="slider-controls-row">
+                <!-- SPEED SLIDER -->
+                <label for="voiceSpeedSlider" class="slider-label">
+                  <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i>
+                  <input
+                    type="range"
+                    id="voiceSpeedSlider"
+                    class="voice-slider"
+                    min="0.5"
+                    max="2"
+                    step="0.01"
+                    value="1"
+                    aria-label="Voice Speed"
+                  />
+                </label>
+                <!-- PITCH SLIDER -->
+                <label for="voicePitchSlider" class="slider-label">
+                  <i class="fas fa-sliders-h fa-fw" aria-hidden="true"></i>
+                  <input
+                    type="range"
+                    id="voicePitchSlider"
+                    class="voice-slider"
+                    min="0.5"
+                    max="2"
+                    step="0.01"
+                    value="1"
+                    aria-label="Voice Pitch"
+                  />
+                </label>
+              </div>
+            </div>
           </div>
           <!-- EXPAND/COLLAPSE TOGGLE BUTTON FOR EXPLANATION -->
           <button
@@ -319,6 +366,7 @@
 
     <!-- SCRIPT -->
     <script src="JS/CORE_ELEMENTS.js" defer></script>
+    <script src="JS/SPEECH_SYNTHESIS.js" defer></script>
     <script src="JS/EXPLANATION_AREA.js" defer></script>
     <script src="JS/THEME_MANAGER.js" defer></script>
     <script src="JS/VOICE_INPUT.js" defer></script>

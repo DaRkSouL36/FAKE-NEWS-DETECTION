@@ -209,13 +209,13 @@
         </div>
         <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
 
-        <!-- EXPLANATION AREA: STYLED CONTAINER FOR EXPLANATION BOX AND OVERLAPPING COPY BUTTON -->
+        <!-- EXPLANATION AREA: MAIN CONTAINER FOR THE EXPLANATION FEATURE -->
         <div class="explanation-area">
+          <!-- EXPLANATION BOX -->
           <div class="explanation-box-container" id="explanationBoxContainer">
-            <!-- STYLED CONTAINER FOR EXPLANATION BOX -->
-            <label for="explanationBox" class="explanation-label"
-              ><strong>EXPLANATION:</strong></label
-            >
+            <label for="explanationBox" class="explanation-label">
+              <strong>EXPLANATION:</strong>
+            </label>
             <div id="explanationLoader" class="explanation-loader hidden"></div>
             <textarea
               id="explanationBox"
@@ -225,7 +225,10 @@
               aria-label="AI-GENERATED FACTUALITY EXPLANATION"
               placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
             ></textarea>
-            <!-- OVERLAPPING COPY BUTTON AS AN ICON, CUTTING INTO THE EXPLANATION BOX -->
+          </div>
+
+          <!-- CONTROLS ROW: COPY, SLIDER, TOGGLE, SLIDER, CLEAR -->
+          <div class="explanation-controls-row">
             <button
               id="copyExplanationBtn"
               class="copy-explanation-btn"
@@ -234,7 +237,44 @@
             >
               <i class="fas fa-copy"></i>
             </button>
-            <!-- CLEAR BUTTON FOR EXPLANATION -->
+
+            <label for="voiceSpeedSlider" class="slider-label">
+              <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i>
+              <input
+                type="range"
+                id="voiceSpeedSlider"
+                class="voice-slider"
+                min="0.5"
+                max="2"
+                step="0.01"
+                value="1"
+                aria-label="Voice Speed"
+              />
+            </label>
+
+            <button
+              id="toggleExplanationBtn"
+              class="toggle-explanation-btn"
+              type="button"
+              aria-label="EXPAND/COLLAPSE EXPLANATION"
+            >
+              <i class="fas fa-chevron-up"></i>
+            </button>
+
+            <label for="voicePitchSlider" class="slider-label">
+              <i class="fas fa-sliders-h fa-fw" aria-hidden="true"></i>
+              <input
+                type="range"
+                id="voicePitchSlider"
+                class="voice-slider"
+                min="0.5"
+                max="2"
+                step="0.01"
+                value="1"
+                aria-label="Voice Pitch"
+              />
+            </label>
+
             <button
               id="clearExplanationBtn"
               class="clear-explanation-btn"
@@ -243,61 +283,18 @@
             >
               <i class="fas fa-times"></i>
             </button>
-            <!-- SPEECH SYNTHESIS (SPEAK/STOP) BUTTON FOR EXPLANATION AREA -->
-            <div class="explanation-speech-controls">
-              <!-- SPEAKER BUTTON SPANNING FULL WIDTH -->
-              <button
-                id="speakExplanationBtn"
-                class="speak-explanation-btn-wide"
-                type="button"
-                aria-label="SPEAK OR STOP EXPLANATION"
-              >
-                <i class="fas fa-volume-up"></i>
-              </button>
-              <!-- SLIDERS ROW -->
-              <div class="slider-controls-row">
-                <!-- SPEED SLIDER -->
-                <label for="voiceSpeedSlider" class="slider-label">
-                  <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i>
-                  <input
-                    type="range"
-                    id="voiceSpeedSlider"
-                    class="voice-slider"
-                    min="0.5"
-                    max="2"
-                    step="0.01"
-                    value="1"
-                    aria-label="Voice Speed"
-                  />
-                </label>
-                <!-- PITCH SLIDER -->
-                <label for="voicePitchSlider" class="slider-label">
-                  <i class="fas fa-sliders-h fa-fw" aria-hidden="true"></i>
-                  <input
-                    type="range"
-                    id="voicePitchSlider"
-                    class="voice-slider"
-                    min="0.5"
-                    max="2"
-                    step="0.01"
-                    value="1"
-                    aria-label="Voice Pitch"
-                  />
-                </label>
-              </div>
-            </div>
           </div>
-          <!-- EXPAND/COLLAPSE TOGGLE BUTTON FOR EXPLANATION -->
+
+          <!-- SPEAKER BUTTON BELOW THE CONTROLS ROW -->
           <button
-            id="toggleExplanationBtn"
-            class="toggle-explanation-btn"
+            id="speakExplanationBtn"
+            class="speak-explanation-btn-wide"
             type="button"
-            aria-label="EXPAND/COLLAPSE EXPLANATION"
+            aria-label="SPEAK OR STOP EXPLANATION"
           >
-            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-volume-up"></i>
           </button>
         </div>
-        <!-- END EXPLANATION AREA -->
       </section>
 
       <!-- SCROLL HINT -->

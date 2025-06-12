@@ -18,3 +18,11 @@
   pointer-events: none;
   transition: opacity 0.25s;
 }
+
+/* HIDE ALL CONTROLS IN THE CONTROLS ROW WHEN COLLAPSED, EXCEPT TOGGLE BUTTON */
+.explanation-controls-row.collapsed .copy-explanation-btn,
+.explanation-controls-row.collapsed .clear-explanation-btn,
+.explanation-controls-row.collapsed .slider-label,
+.speak-explanation-btn-wide.collapsed {
+  display: none !important;
+}

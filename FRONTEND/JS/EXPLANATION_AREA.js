@@ -38,12 +38,21 @@ if (clearExplanationBtn && explanationBox) {
 // TRACKS WHETHER THE EXPLANATION IS EXPANDED
 let explanationExpanded = true;
 
+// GET OTHER CONTROLS
+const controlsRow = document.querySelector(".explanation-controls-row");
+const speakBtn = document.querySelector(".speak-explanation-btn-wide");
+
 if (toggleExplanationBtn && explanationBoxContainer) {
   toggleExplanationBtn.addEventListener("click", () => {
     explanationExpanded = !explanationExpanded;
 
     // TOGGLE A CLASS TO COLLAPSE/EXPAND THE CONTAINER
     explanationBoxContainer.classList.toggle("collapsed", !explanationExpanded);
+
+    // TOGGLE COLLAPSED STATE ON CONTROLS ROW AND SPEAKER BUTTON
+    if (controlsRow)
+      controlsRow.classList.toggle("collapsed", !explanationExpanded);
+    if (speakBtn) speakBtn.classList.toggle("collapsed", !explanationExpanded);
 
     // UPDATE THE ICON DIRECTION
     toggleExplanationBtn.innerHTML = explanationExpanded

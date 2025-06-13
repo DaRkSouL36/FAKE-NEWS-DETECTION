@@ -25,10 +25,17 @@ if (clearNewsBtn && newsInput) {
 // =====================
 if (clearExplanationBtn && explanationBox) {
   clearExplanationBtn.addEventListener("click", () => {
-    explanationBox.value = "";
-    explanationBox.classList.remove("filled");
-    explanationBox.style.height = "auto";
-    explanationBox.focus();
+    if (explanationBox.value.trim() !== "") {
+      explanationBox.value = "";
+      explanationBox.classList.remove("filled");
+      explanationBox.style.height = "auto";
+      explanationBox.focus();
+
+      if (explanationLoader) {
+        explanationLoader.className = "explanation-loader hidden";
+        explanationLoader.innerHTML = "";
+      }
+    }
   });
 }
 
@@ -68,21 +75,25 @@ if (toggleExplanationBtn && explanationBoxContainer) {
 // =====================
 if (copyExplanationBtn && explanationBox) {
   copyExplanationBtn.addEventListener("click", async () => {
-    explanationBox.select();
-    explanationBox.setSelectionRange(0, 99999);
+    if (explanationBox.value.trim() !== "") {
+      explanationBox.select();
+      explanationBox.setSelectionRange(0, 99999);
 
-    try {
-      await navigator.clipboard.writeText(explanationBox.value);
-      showToast("EXPLANATION COPIED!", "success");
-    } catch (err) {
       try {
-        document.execCommand("copy");
+        await navigator.clipboard.writeText(explanationBox.value);
         showToast("EXPLANATION COPIED!", "success");
-      } catch (err2) {
-        showToast("FAILED TO COPY EXPLANATION.", "error");
+      } catch (err) {
+        try {
+          document.execCommand("copy");
+          showToast("EXPLANATION COPIED!", "success");
+        } catch (err2) {
+          showToast("FAILED TO COPY EXPLANATION.", "error");
+        }
       }
+      explanationBox.setSelectionRange(0, 0);
+      explanationBox.blur();
+    } else {
+      showToast("NO EXPLANATION TO COPY.", "error");
     }
-    explanationBox.setSelectionRange(0, 0);
-    explanationBox.blur();
   });
 }

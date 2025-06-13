@@ -30,6 +30,7 @@ if ("webkitSpeechRecognition" in window) {
       '<span class="error-text">SPEECH RECOGNITION ERROR. PLEASE TRY AGAIN.</span>';
     showResult();
     micBtn.disabled = false;
+    newsInput.focus();
   };
 
   recognition.onresult = (event) => {
@@ -39,6 +40,7 @@ if ("webkitSpeechRecognition" in window) {
       getAnimatedStatusIcon("mic") +
       `INPUT CAPTURED: "<span style="text-transform:uppercase;">${transcript}</span>"`;
     showResult();
+    micBtn.disabled = false;
     newsInput.focus();
     animateResult();
   };

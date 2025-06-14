@@ -1,0 +1,57 @@
+/* ===========================
+   LIGHT THEME OVERRIDES FOR TEXTAREA AREA AND BUTTONS
+   =========================== */
+
+/* SOFT GRAY GRADIENT AND NEON GLOW FOR TEXTAREA BOX */
+body.light-mode .textarea-box {
+  background: linear-gradient(135deg, #f8fafd 85%, #e3e9ef 100%);
+  box-shadow: 0 0 12px #b3eaff33, 0 0 24px #0cf1;
+}
+
+/* HIGH-CONTRAST TEAL FOR TEXTAREA INPUT */
+body.light-mode .textarea-box textarea {
+  color: #16343a;
+}
+
+/* PLACEHOLDER TEXT WITH MEDIUM GRAY FOR CONTRAST */
+body.light-mode .textarea-box textarea::placeholder {
+  color: #757575 !important;
+  opacity: 1;
+}
+
+/* CLEAR BUTTON WITH IMPROVED BORDER AND TEXT CONTRAST */
+body.light-mode .clear-news-btn {
+  background: #f8fafd;
+  border-color: #0ccfd8;
+  color: #0ca0b0;
+  box-shadow: 0 0 6px #0cf2;
+}
+body.light-mode .clear-news-btn:hover,
+body.light-mode .clear-news-btn:focus-visible {
+  background: #0cf;
+  color: #fff;
+  box-shadow: 0 0 14px #0cf4;
+  outline: 2px solid #0cf;
+  outline-offset: 2px;
+}
+
+/* MICROPHONE BUTTON WITH SOFT GLOW AND ACCENT COLOR */
+body.light-mode .mic-button {
+  background: #f8fafd;
+  border-color: #0ccfd8;
+  color: #0ca0b0;
+  box-shadow: 0 0 10px #0cf2;
+}
+body.light-mode .mic-button:hover,
+body.light-mode .mic-button:focus-visible {
+  background: #0cf;
+  color: #fff;
+  box-shadow: 0 0 18px #0cf6;
+  outline: 2px solid #0cf;
+  outline-offset: 2px;
+}
+
+/* MICROPHONE ICON INHERITS BUTTON COLOR */
+body.light-mode .mic-button .mic-circle i {
+  color: inherit;
+}

@@ -90,9 +90,10 @@
     <!-- 7. THEME STYLES (ALWAYS LAST TO OVERRIDE) -->
     <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_BASE.css" />
     <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_LAYOUT.css" />
-    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_COMPONENTS.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_RESULT_CONTAINER.css" />
     <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_EXPLANATION.css" />
     <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_MODALS.css" />
+    <link rel="stylesheet" href="CSS/THEME/THEME_LIGHT_TEXTAREA.css" />
   </head>
 
   <body>
@@ -101,7 +102,11 @@
     <!-- BACKGROUND VIDEO LAYER -->
     <video autoplay muted loop playsinline id="background-video">
       <!-- PLAYS A LOOPING, MUTED BACKGROUND VIDEO FOR A MODERN VISUAL EFFECT -->
-      <source src="BACKGROUND/DaRkSouL.mp4" type="video/mp4" />
+      <source
+        id="video-source"
+        src="BACKGROUND/DaRkSouL[D].mp4"
+        type="video/mp4"
+      />
       <!-- PROVIDES THE VIDEO FILE (USE RELATIVE PATH FOR DEPLOYMENT) -->
       YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.
       <!-- FALLBACK TEXT IF VIDEO IS NOT SUPPORTED -->

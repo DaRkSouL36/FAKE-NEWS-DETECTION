@@ -2,27 +2,32 @@
    LIGHT MODE: BASE COLORS, BACKGROUND, TYPOGRAPHY, LAYOUT
    =========================== */
 
-/* LIGHT MODE BACKGROUND AND TEXT COLOR */
+/* LIGHT MODE BACKGROUND AND TEXT COLOR WITH IMPROVED CONTRAST */
 body.light-mode {
   background: #f6f8fb;
-  color: #191919;
+  color: #181b20;
 }
 
 /* LIGHT MODE OVERLAY TEXT COLOR */
 body.light-mode .overlay {
-  color: #191919;
+  color: #181b20; 
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+  transition: color 0.4s;
 }
 
-/* LIGHT MODE HERO HEADING COLORS AND SHADOWS */
+/* LIGHT MODE HERO HEADING COLORS AND SHADOWS FOR CONTRAST */
 body.light-mode .hero h1 {
-  color: #1a2533;
-  text-shadow: 0 2px 14px #0cf2, 0 0 8px #dbeafe;
+  color: #181b20; 
+  text-shadow: 0 2px 14px #7ee8fa55, 0 0 8px #dbeafe;
 }
 
 /* LIGHT MODE HIGHLIGHTED TEXT GRADIENT AND EFFECTS */
 body.light-mode .highlight {
   color: #0cf;
-  background: linear-gradient(to right, #0cf, #7ee8fa 80%);
+  background: linear-gradient(to right, #0cf, #1fa2ff 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -30,8 +35,33 @@ body.light-mode .highlight {
   filter: brightness(1.1) contrast(1.2);
 }
 
-/* LIGHT MODE BACKGROUND VIDEO BRIGHTNESS AND BACKGROUND COLOR */
+/* LIGHT MODE BACKGROUND VIDEO IN UPPER SECTION ONLY */
 body.light-mode #background-video {
-  filter: brightness(0.95);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 40vh;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.92); 
   background: #e9f4fa;
+  pointer-events: none;
+}
+
+/* GRADIENT FADE AT BOTTOM OF VIDEO FOR SMOOTH TRANSITION */
+body.light-mode .video-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(233, 244, 250, 0) 0%,
+    #f6f8fb 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }

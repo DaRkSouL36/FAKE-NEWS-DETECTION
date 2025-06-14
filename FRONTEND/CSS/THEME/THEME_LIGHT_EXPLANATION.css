@@ -2,50 +2,97 @@
    LIGHT THEME OVERRIDES FOR EXPLANATION AREA AND BUTTONS
    =========================== */
 
-/* EXPLANATION BOX CONTAINER IN LIGHT MODE */
+/* SOFT GRADIENT BACKGROUND AND GENTLE SHADOW FOR EXPLANATION BOX CONTAINER */
 body.light-mode .explanation-box-container {
-  background: #f8fafd;
-  box-shadow: 0 0 18px #0cf, 0 0 32px #0cf2;
+  background: linear-gradient(135deg, #f8fafd 85%, #e3e9ef 100%);
+  box-shadow: 0 0 12px #b3eaff33, 0 0 24px #0cf1;
 }
 
-/* EXPLANATION BOX TEXT COLOR IN LIGHT MODE */
+/* HIGH-CONTRAST TEAL FOR EXPLANATION TEXT */
 body.light-mode .explanation-box {
-  color: #007b8a;
+  color: #16343a;
 }
 
-/* COPY BUTTON IN LIGHT MODE */
+/* DARKER TEAL FOR EXPLANATION LABEL FOR CONSISTENCY */
+body.light-mode .explanation-label {
+  color: #16343a;
+}
+
+/* COPY BUTTON WITH IMPROVED BORDER AND TEXT CONTRAST */
 body.light-mode .copy-explanation-btn {
   background: #f8fafd;
-  border-color: #0cf;
-  color: #0cf;
+  border-color: #0ccfd8;
+  color: #0ca0b0;
+  box-shadow: 0 0 6px #0cf2;
 }
 body.light-mode .copy-explanation-btn:hover,
-body.light-mode .copy-explanation-btn:focus {
+body.light-mode .copy-explanation-btn:focus-visible {
   background: #0cf;
   color: #fff;
+  box-shadow: 0 0 14px #0cf4;
+  outline: 2px solid #0cf;
+  outline-offset: 2px;
 }
 
-/* CLEAR BUTTON IN LIGHT MODE */
+/* CLEAR BUTTON WITH IMPROVED BORDER AND TEXT CONTRAST */
 body.light-mode .clear-explanation-btn {
   background: #f8fafd;
-  border-color: #0cf;
-  color: #0cf;
+  border-color: #0ccfd8;
+  color: #0ca0b0;
+  box-shadow: 0 0 6px #0cf2;
 }
 body.light-mode .clear-explanation-btn:hover,
-body.light-mode .clear-explanation-btn:focus {
+body.light-mode .clear-explanation-btn:focus-visible {
   background: #0cf;
   color: #fff;
+  box-shadow: 0 0 14px #0cf4;
+  outline: 2px solid #0cf;
+  outline-offset: 2px;
 }
 
-/* TOGGLE BUTTON IN LIGHT MODE */
+/* TOGGLE BUTTON WITH GRADIENT AND CLEAR CONTRAST STATES */
 body.light-mode .toggle-explanation-btn {
   background: linear-gradient(90deg, #7ee8fa 0%, #0cf 100%);
-  color: #191919;
-  box-shadow: 0 0 12px #0cf2;
+  color: #16343a;
+  box-shadow: 0 0 8px #0cf2;
 }
 body.light-mode .toggle-explanation-btn:hover,
-body.light-mode .toggle-explanation-btn:focus {
+body.light-mode .toggle-explanation-btn:focus-visible {
   background: linear-gradient(90deg, #0cf 0%, #7ee8fa 100%);
   color: #fff;
-  box-shadow: 0 0 24px #0cf6;
+  box-shadow: 0 0 18px #0cf6;
+  outline: 2px solid #0cf;
+  outline-offset: 2px;
+}
+
+/* SLIDER LABELS IN DARKER TEAL FOR READABILITY AND LIGHT BACKGROUND */
+body.light-mode .slider-label {
+  color: #16343a;
+  background: #f8fafd;
+  border: 2px solid #0ccfd8;
+  box-shadow: 0 2px 8px #0cf1;
+}
+
+/* SLIDER ICONS INHERIT ACCENT COLOR FOR LIGHT MODE */
+body.light-mode .slider-label i {
+  color: #0ca0b0;
+}
+
+/* SLIDER CONTRAST WITH ACCENT COLOR AND SOFT SHADOW */
+body.light-mode .voice-slider {
+  accent-color: #0cf;
+  background: #e3e9ef;
+  box-shadow: 0 1px 6px #0cf2;
+}
+
+/* ICONS INHERIT BUTTON COLOR FOR CONSISTENCY */
+body.light-mode .explanation-controls-row i,
+body.light-mode .speak-explanation-btn-wide i {
+  color: inherit;
+}
+
+/* PLACEHOLDER TEXT WITH MEDIUM GRAY FOR CONTRAST */
+body.light-mode .explanation-box::placeholder {
+  color: #757575 !important;
+  opacity: 1;
 }

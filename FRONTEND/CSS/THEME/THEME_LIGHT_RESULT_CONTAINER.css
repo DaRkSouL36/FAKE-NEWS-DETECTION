@@ -1,0 +1,27 @@
+/* ===========================
+   LIGHT THEME OVERRIDES FOR RESULT CONTAINER
+   =========================== */
+
+/* RESULT CONTAINER: LIGHT GRAY BACKGROUND WITH SOFT CYAN GLOW */
+body.light-mode #resultContainer {
+  background: linear-gradient(135deg, #e6e9ef 80%, #f8fafd 100%);
+  color: #23262a;
+  box-shadow: 0 0 12px #7ee8fa55, 0 0 18px #0cf2;
+}
+
+/* SHOW RESULT CONTAINER WHEN NOT HIDDEN */
+body.light-mode #resultContainer:not(.hidden) {
+  display: block;
+}
+
+/* RESULT TEXT: DARK GRAY WITH SOFT CYAN GLOW */
+body.light-mode #resultText {
+  color: #181b20;
+  text-shadow: 0 0 6px #7ee8fa99;
+}
+
+/* CONFIDENCE BAR WRAPPER: DARK GRAY WITH CYAN NEON BORDER */
+body.light-mode .confidence-bar-wrapper {
+  background: #191b1f;
+  box-shadow: 0 0 12px #00eaff66;
+}

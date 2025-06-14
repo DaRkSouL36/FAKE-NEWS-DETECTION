@@ -15,8 +15,13 @@ if (explanationBox) {
 // =====================
 if (clearNewsBtn && newsInput) {
   clearNewsBtn.addEventListener("click", () => {
-    newsInput.value = "";
-    newsInput.focus();
+    if (newsInput.value.trim() !== "") {
+      newsInput.value = "";
+      newsInput.focus();
+      showToast("NEWS INPUT CLEARED!", "success");
+    } else {
+      showToast("NOTHING TO CLEAR.", "error");
+    }
   });
 }
 
@@ -35,6 +40,9 @@ if (clearExplanationBtn && explanationBox) {
         explanationLoader.className = "explanation-loader hidden";
         explanationLoader.innerHTML = "";
       }
+      showToast("EXPLANATION CLEARED!", "success");
+    } else {
+      showToast("NOTHING TO CLEAR.", "error");
     }
   });
 }

@@ -1,41 +1,51 @@
 // SPEECH SYNTHESIS STATE
 let isSpeaking = false;
 let utterance = null;
+let wasManuallyStopped = false;
 
 // INITIALIZE ICON
 if (speakExplanationBtn)
   speakExplanationBtn.innerHTML = getAnimatedStatusIcon("speaker-idle");
 
-// TOGGLE SPEECH SYNTHESIS
 function toggleSpeechSynthesis() {
-  if (!explanationBox || !explanationBox.value.trim()) return; // USE .value FOR TEXTAREA
+  if (!explanationBox || !explanationBox.value.trim()) {
+    showToast("NO EXPLANATION TO SPEAK.", "error");
+    return;
+  }
   isSpeaking ? stopSpeechSynthesis() : startSpeechSynthesis();
 }
 
 // START SPEAKING
 function startSpeechSynthesis() {
-  if (!explanationBox || !explanationBox.value.trim()) return; // USE .value FOR TEXTAREA
+  if (!explanationBox || !explanationBox.value.trim()) return;
   window.speechSynthesis.cancel();
 
-  utterance = new SpeechSynthesisUtterance(explanationBox.value); // USE .value FOR TEXTAREA
+  utterance = new SpeechSynthesisUtterance(explanationBox.value);
   utterance.rate = parseFloat(voiceSpeedSlider?.value) || 1;
   utterance.pitch = parseFloat(voicePitchSlider?.value) || 1;
   utterance.onend = utterance.onerror = () => {
     isSpeaking = false;
-    updateSpeakerIcon("speaker-idle");
+    if (!wasManuallyStopped) {
+      updateSpeakerIcon("speaker-idle");
+    }
   };
 
   isSpeaking = true;
+  wasManuallyStopped = false;
   updateSpeakerIcon("speaker-speaking");
   window.speechSynthesis.speak(utterance);
 }
 
 // STOP SPEAKING
 function stopSpeechSynthesis() {
+  wasManuallyStopped = true;
   window.speechSynthesis.cancel();
   isSpeaking = false;
   updateSpeakerIcon("speaker-muted");
-  setTimeout(() => updateSpeakerIcon("speaker-idle"), 900);
+  setTimeout(() => {
+    updateSpeakerIcon("speaker-idle");
+    wasManuallyStopped = false;
+  }, 3000);
 }
 
 // UPDATE ICON

@@ -77,6 +77,6 @@
 .speak-explanation-btn-wide:focus {
   outline: 2px solid #0ff;
   outline-offset: 2px;
-  background: linear-gradient(45deg, #0ff, #0cf);
+  background: linear-gradient(45deg, #00ffe0, #ff00cc);
   color: #fff;
 }

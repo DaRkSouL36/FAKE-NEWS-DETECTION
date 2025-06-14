@@ -146,6 +146,7 @@
 
         <div class="model-select-row">
           <!-- MODEL SELECTION DROPDOWN ROW, PLACED ABOVE HEADLINE AND TEXTAREA -->
+
           <select id="modelSelect">
             <!-- DROPDOWN TO SELECT ML MODEL -->
             <option value="LOGISTIC">LOGISTIC</option>
@@ -159,15 +160,18 @@
         <!-- END MODEL SELECTION ROW -->
 
         <div class="textarea-container">
-          <!-- CONTAINER FOR TEXTAREA AND MICROPHONE BUTTON, POSITIONED RELATIVE FOR OVERLAP EFFECT -->
+          <!-- CONTAINER FOR TEXTAREA AND MICROPHONE BUTTON -->
+
           <div class="textarea-box">
-            <!-- BLACK ROUNDED BOX FOR TEXTAREA, ADDS GLOW AND BACKGROUND -->
+            <!-- ROUNDED BOX FOR TEXTAREA -->
+
             <textarea
               placeholder="PASTE YOUR NEWS ARTICLE HERE..."
               id="newsInput"
               aria-label="NEWS ARTICLE INPUT"
             ></textarea>
             <!-- TEXTAREA FOR USER TO INPUT/PASTE NEWS ARTICLE -->
+
             <button
               id="clearNewsBtn"
               class="clear-news-btn"
@@ -176,6 +180,8 @@
             >
               <i class="fas fa-times"></i>
             </button>
+            <!-- BUTTON TO CLEAR THE TEXTAREA INPUT -->
+
             <button
               id="micBtn"
               class="mic-button"
@@ -186,15 +192,16 @@
                 <i class="fas fa-microphone"></i>
               </span>
             </button>
-            <!-- BUTTON TO ENABLE VOICE INPUT USING MICROPHONE, GLOWING CIRCLE OVERLAPPING BOX -->
+            <!-- BUTTON TO ENABLE VOICE INPUT USING MICROPHONE -->
           </div>
         </div>
         <!-- END TEXTAREA CONTAINER -->
 
         <div class="action-buttons">
+          <!-- CONTAINER FOR ACTION BUTTONS LIKE ANALYZE -->
           <button id="analyzeBtn" class="button">ANALYZE</button>
+          <!-- BUTTON TO SUBMIT THE NEWS ARTICLE FOR ANALYSIS -->
         </div>
-        <!-- BUTTON TO SUBMIT THE NEWS ARTICLE FOR ANALYSIS -->
 
         <div
           id="resultContainer"
@@ -202,12 +209,14 @@
           aria-live="polite"
           aria-atomic="true"
         >
-          <!-- PREDICTION AND CONFIDENCE TEXT GOES HERE -->
+          <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
+
           <div id="resultText"></div>
-          <!-- CONFIDENCE BAR ALWAYS PRESENT FOR JS TO RENDER INTO -->
+          <!-- DYNAMICALLY POPULATED TEXT: FAKE OR REAL, BASED ON PREDICTION -->
+
           <div id="confidenceBarWrapper" class="confidence-bar-wrapper"></div>
+          <!-- CONFIDENCE BAR -->
         </div>
-        <!-- CONTAINER TO DISPLAY THE FAKE/REAL RESULT AND CONFIDENCE, WITH ARIA ATTRIBUTES FOR ACCESSIBILITY -->
 
         <!-- EXPLANATION AREA: MAIN CONTAINER FOR THE EXPLANATION FEATURE -->
         <div class="explanation-area">
@@ -216,7 +225,10 @@
             <label for="explanationBox" class="explanation-label">
               <strong>EXPLANATION:</strong>
             </label>
+
             <div id="explanationLoader" class="explanation-loader hidden"></div>
+            <!-- LOADER ANIMATION WHILE EXPLANATION IS BEING GENERATED -->
+
             <textarea
               id="explanationBox"
               class="explanation-box"
@@ -225,10 +237,12 @@
               aria-label="AI-GENERATED FACTUALITY EXPLANATION"
               placeholder="EXPLANATION WILL APPEAR HERE AFTER ANALYSIS..."
             ></textarea>
+            <!-- NON-EDITABLE TEXTAREA TO DISPLAY AI-GENERATED EXPLANATION -->
           </div>
 
           <!-- CONTROLS ROW: COPY, SLIDER, TOGGLE, SLIDER, CLEAR -->
           <div class="explanation-controls-row">
+            <!-- COPY BUTTON FOR EXPLANATION TEXT -->
             <button
               id="copyExplanationBtn"
               class="copy-explanation-btn"
@@ -238,6 +252,7 @@
               <i class="fas fa-copy"></i>
             </button>
 
+            <!-- VOICE SPEED SLIDER CONTROL -->
             <label for="voiceSpeedSlider" class="slider-label">
               <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i>
               <input
@@ -252,6 +267,7 @@
               />
             </label>
 
+            <!-- TOGGLE BUTTON TO COLLAPSE/EXPAND EXPLANATION BOX -->
             <button
               id="toggleExplanationBtn"
               class="toggle-explanation-btn"
@@ -261,6 +277,7 @@
               <i class="fas fa-chevron-up"></i>
             </button>
 
+            <!-- VOICE PITCH SLIDER CONTROL -->
             <label for="voicePitchSlider" class="slider-label">
               <i class="fas fa-sliders-h fa-fw" aria-hidden="true"></i>
               <input
@@ -275,6 +292,7 @@
               />
             </label>
 
+            <!-- CLEAR EXPLANATION BUTTON -->
             <button
               id="clearExplanationBtn"
               class="clear-explanation-btn"
@@ -294,6 +312,7 @@
           >
             <i class="fas fa-volume-up"></i>
           </button>
+          <!-- BUTTON TO TRIGGER TEXT-TO-SPEECH FOR THE EXPLANATION -->
         </div>
       </section>
 

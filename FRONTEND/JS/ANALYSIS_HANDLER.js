@@ -2,12 +2,16 @@
 // ANALYZE BUTTON LOGIC AND API RESPONSE
 // =====================
 
+let explanationGenerated = false;
 analyzeBtn.addEventListener("click", async () => {
   const text = newsInput.value.trim();
   const model = modelSelect.value;
 
-  // RESET EVERYTHING EXCEPT THE NEWS INPUT
-  resetUIExceptNewsInput();
+  // IF EXPLANATION IS CURRENTLY SHOWING, RESET EVERYTHING EXCEPT THE NEWS INPUT
+  if (explanationGenerated) {
+    resetUIExceptNewsInput();
+    explanationGenerated = false;
+  }
 
   // HANDLES EMPTY INPUT CASE
   if (!text) {
@@ -20,7 +24,7 @@ analyzeBtn.addEventListener("click", async () => {
       explanationBox.classList.remove("filled");
       explanationBox.value = "";
     }
-    renderConfidenceBar(0, false);
+    renderConfidenceBar(null, false);
     return;
   }
 
@@ -32,6 +36,7 @@ analyzeBtn.addEventListener("click", async () => {
         <span style="letter-spacing:1px;">ANALYZING...</span>
       </div>
     `);
+    renderConfidenceBar(0, false, true);
     showResult();
     analyzeBtn.disabled = true;
 
@@ -93,6 +98,7 @@ analyzeBtn.addEventListener("click", async () => {
           </span>
         `;
       }, 100);
+      explanationGenerated = true;
     } else {
       // HANDLES INVALID RESPONSE FORMAT
       updateResultText(`
@@ -103,7 +109,7 @@ analyzeBtn.addEventListener("click", async () => {
         explanationBox.classList.remove("filled");
         explanationBox.value = "";
       }
-      renderConfidenceBar(0, false);
+      renderConfidenceBar(null, false);
     }
   } catch (err) {
     // HANDLES NETWORK/API ERRORS
@@ -116,7 +122,7 @@ analyzeBtn.addEventListener("click", async () => {
       explanationBox.classList.remove("filled");
       explanationBox.value = "";
     }
-    renderConfidenceBar(0, false);
+    renderConfidenceBar(null, false);
   } finally {
     // CLEANUP AND UI RESET
     newsInput.focus();

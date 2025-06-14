@@ -11,13 +11,38 @@ function updateResultText(html) {
   }
 }
 
+// FUNCTION TO CONVERT SPOKEN PUNCTUATION/COMMANDS TO SYMBOLS/FORMATTING
+function processTranscript(transcript) {
+  return transcript
+    .replace(/\bcomma\b/gi, ",")
+    .replace(/\bperiod\b/gi, ".")
+    .replace(/\bfull stop\b/gi, ".")
+    .replace(/\bquestion mark\b/gi, "?")
+    .replace(/\bexclamation mark\b/gi, "!")
+    .replace(/\bcolon\b/gi, ":")
+    .replace(/\bsemicolon\b/gi, ";")
+    .replace(/\bdash\b/gi, "-")
+    .replace(/\bopen quote\b/gi, '"')
+    .replace(/\bclose quote\b/gi, '"')
+    .replace(/\bnew line\b/gi, "\n")
+    .replace(/\bnew paragraph\b/gi, "\n\n");
+}
+
 // FUNCTION TO RENDER CONFIDENCE BAR
-function renderConfidenceBar(confidence, isReal) {
+function renderConfidenceBar(confidence, isReal, isLoading = false) {
   if (!confidenceBarWrapper) {
     console.error("CONFIDENCE BAR WRAPPER NOT FOUND IN DOM");
     return;
   }
-  const percent = Math.round(confidence * 100);
+
+  if (confidence === null || confidence === undefined) {
+    confidenceBarWrapper.innerHTML = "";
+    confidenceBarWrapper.style.display = "none";
+    return;
+  }
+
+  confidenceBarWrapper.style.display = "block";
+  const percent = isLoading ? 0 : Math.round(confidence * 100);
   const iconSVG = "";
   confidenceBarWrapper.innerHTML = `
     <div class="confidence-bar ${isReal ? "green" : "red"}" 
@@ -29,8 +54,14 @@ function renderConfidenceBar(confidence, isReal) {
 
 // FUNCTION TO RESET UI EXCEPT NEWS INPUT
 function resetUIExceptNewsInput() {
-  // CLEAR THE RESULT TEXT
-  updateResultText("");
+  // RESET RESULT CONTAINER TO ANALYZING STATE WITH SPINNER
+  updateResultText(`
+    <div style="display:flex;align-items:center;gap:12px;justify-content:center;">
+      ${getAnimatedStatusIcon("loading")}
+      <span style="letter-spacing:1px;">ANALYZING...</span>
+    </div>
+  `);
+  showResult();
 
   // CLEAR THE CONFIDENCE BAR
   renderConfidenceBar(0, false);
@@ -45,8 +76,13 @@ function resetUIExceptNewsInput() {
 
   // RESET EXPLANATION LOADER
   if (explanationLoader) {
-    explanationLoader.className = "explanation-loader hidden";
-    explanationLoader.innerHTML = "";
+    explanationLoader.className = "explanation-loader gradient-animated";
+    explanationLoader.innerHTML = ` 
+    <div style="margin-top:10px;letter-spacing:1px;">
+      <div class="loader" aria-label="GENERATING"></div>
+    </div>
+  `;
+    explanationLoader.classList.remove("hidden");
   }
 
   // RESET COPY AND CLEAR BUTTONS FOR EXPLANATION
@@ -68,6 +104,14 @@ function resetUIExceptNewsInput() {
       explanationBoxContainer.classList.remove("collapsed");
     }
   }
+
+  // ENSURE CONTROLS ROW AND SPEAKER BUTTON ARE VISIBLE AFTER RESET
+  const controlsRow = document.querySelector(".explanation-controls-row");
+  const speakBtn = document.querySelector(".speak-explanation-btn-wide");
+  if (controlsRow) controlsRow.classList.remove("collapsed");
+  if (speakBtn) speakBtn.classList.remove("collapsed");
+  // Also reset the expanded state flag if you use it
+  if (typeof explanationExpanded !== "undefined") explanationExpanded = true;
 
   // RESET LOADING/ANIMATION CLASSES ON RESULT CONTAINER
   if (resultContainer) {

@@ -65,7 +65,7 @@ function getAnimatedStatusIcon(type) {
         <circle cx="18" cy="18" r="16" fill="#ff0066" opacity="0.15"/>
         <g>
           <path d="M13 13l10 10M23 13l-10 10" stroke="#ff0066" stroke-width="3" fill="none" stroke-linecap="round">
-            <animateTransform attributeName="transform" type="translate" values="0 0;2 0;-2 0;0 0" dur="0.6s" repeatCount="2"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;2 0;-2 0;0 0" dur="0.6s" repeatCount="indefinite"/>
           </path>
         </g>
       </svg>`;

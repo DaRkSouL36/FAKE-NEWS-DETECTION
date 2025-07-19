@@ -209,11 +209,39 @@ YOU ARE FREE TO USE, MODIFY, AND DISTRIBUTE THIS PROJECT WITH ATTRIBUTION.
 
 ## 📦 INSTALLATION INSTRUCTIONS
 
-1. **CLONE THE REPOSITORY**
+> 1. **CLONE THE REPOSITORY**
+
+---
 
 `git clone https://github.com/DaRkSouL36/FAKE-NEWS-DETECTION`
 
 `cd "FAKE-NEWS-DETECTION"`
+
+---
+
+> 2. **MODERN & ACCESSIBLE UI**
+
+---
+
+- DARK MODE FEATURES A VIDEO BACKGROUND FOR A DYNAMIC VISUAL EXPERIENCE.  
+  🎥 [WATCH THE DARK MODE VIDEO BACKGROUND HERE](https://www.pexels.com/video/abstract-glowing-waves-on-black-background-29717425/)  
+  📁 STORED AS: `FRONTEND/BACKGROUND/DARKSOUL[D].MP4`
+
+- LIGHT MODE ALSO INCLUDES AN ABSTRACT PARTICLE WAVE BACKGROUND.  
+  🎥 [WATCH THE LIGHT MODE VIDEO BACKGROUND HERE](https://www.pexels.com/video/animated-white-and-black-color-digital-abstract-particle-wave-background-cyber-or-technology-background-od-moving-particles-28561007/)  
+  📁 STORED AS: `FRONTEND/BACKGROUND/DARKSOUL[W].MP4`
+
+---
+
+> 3. **DATA STORAGE** 
+---
+
+| DATA SOURCE    | [KAGGLE – FAKE AND REAL NEWS DATASET](https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset) |
+
+--- 
+THE KAGGLE DATASET IS STORED INSIDE THE ROOT-LEVEL `DATA/` DIRECTORY:  
+- `FAKE-NEWS-DETECTION/DATA/FAKE.CSV`
+- `FAKE-NEWS-DETECTION/DATA/TRUE.CSV`
 
 <p>
   <a href="#-fake-news-detection-system">
